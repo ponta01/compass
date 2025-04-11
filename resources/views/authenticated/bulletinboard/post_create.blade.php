@@ -2,6 +2,9 @@
 <div class="post_create_container d-flex">
   <div class="post_create_area border w-50 m-5 p-5">
     <div class="">
+      @if($errors->first('post_category_id'))
+      <span class="error_message">{{ $errors->first('post_category_id') }}</span>
+      @endif
       <p class="mb-0">カテゴリー</p>
       <select class="w-100" form="postCreate" name="post_category_id">
         @foreach($main_categories as $main_category)
@@ -11,6 +14,7 @@
         @endforeach
       </select>
     </div>
+
     <div class="mt-3">
       @if($errors->first('post_title'))
       <span class="error_message">{{ $errors->first('post_title') }}</span>
@@ -30,16 +34,27 @@
     </div>
     <form action="{{ route('post.create') }}" method="post" id="postCreate">{{ csrf_field() }}</form>
   </div>
+
+      <!-- ログインユーザーが講師だったら、下記のサブカテゴリーを表示させてね。みたいなif文をここら辺にいれるはず -->
   @can('admin')
   <div class="w-25 ml-auto mr-auto">
     <div class="category_area mt-5 p-5">
-      <div class="">
+      <div class="category">
+        @if($errors->first('main_category_name'))
+        <span class="error_message">{{ $errors->first('main_category_name') }}</span>
+        @endif
         <p class="m-0">メインカテゴリー</p>
         <input type="text" class="w-100" name="main_category_name" form="mainCategoryRequest">
         <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="mainCategoryRequest">
       </div>
       <!-- サブカテゴリー追加 -->
       <form action="{{ route('main.category.create') }}" method="post" id="mainCategoryRequest">{{ csrf_field() }}</form>
+        @if($errors->first('sub_category_name'))
+        <span class="error_message">{{ $errors->first('sub_category_name') }}</span>
+        @endif
+        <p class="m-0">サブカテゴリー</p>
+        <input type="text" class="w-100" name="sub_category_name" form="subCategoryRequest">
+        <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="subCategoryRequest">
     </div>
   </div>
   @endcan

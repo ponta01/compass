@@ -15,7 +15,8 @@ class Subjects extends Model
         'subject'
     ];
 
+    // このファイルは中間テーブルです。ユーザーと科目の多対多リレーション
     public function users(){
-        return;// リレーションの定義
+        return $this->belongsToMany(User::class, 'subject_users', 'subject_id', 'user_id');;// リレーションの定義
     }
 }

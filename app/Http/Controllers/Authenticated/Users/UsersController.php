@@ -27,6 +27,24 @@ class UsersController extends Controller
         return view('authenticated.users.search', compact('users', 'subjects'));
     }
 
+        public function search(Request $request){
+        // キーワードを取得
+        $keyword = $request->input('keyword');
+        // 2つ目の処理
+        if (empty($keyword)) {
+        $results = User::all(); // または空のコレクションを返す
+        } else {
+        $results = User::where('last_name', 'LIKE', "%{$keyword}%")
+                   ->orWhere('first_name', 'LIKE', "%{$keyword}%")
+                   ->orWhere('last_name_kana', 'LIKE', "%{$keyword}%")
+                   ->orWhere('first_name_kana', 'LIKE', "%{$keyword}%")
+                   ->get();
+        }
+        // 3つ目の処理
+        return view('authenticated.users.search',['keyword'=>$keyword, 'results'=>$results]);
+    }
+
+
     public function userProfile($id){
         $user = User::with('subjects')->findOrFail($id);
         $subject_lists = Subjects::all();

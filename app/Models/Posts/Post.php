@@ -4,6 +4,7 @@ namespace App\Models\Posts;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Post extends Model
 {
     const UPDATED_AT = null;
@@ -15,6 +16,7 @@ class Post extends Model
         'post',
     ];
 
+    // ユーザーモデルとポストモデルの1対多リレーション
     public function user(){
         return $this->belongsTo('App\Models\Users\User');
     }
@@ -23,8 +25,9 @@ class Post extends Model
         return $this->hasMany('App\Models\Posts\PostComment');
     }
 
+    // サブカテゴリーとポストサブカテゴリーのリレーション
     public function subCategories(){
-        // リレーションの定義
+        return $this->belongsTo(SubCategory::class, 'sub_category_id');// リレーションの定義
     }
 
     // コメント数

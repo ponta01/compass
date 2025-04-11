@@ -6,9 +6,29 @@
   padding: 0;
 }
 
+#atlas{
+  margin: 10% 35% 0% 45%
+}
+
+.border vh-50 w-25 {
+  margin-top: 13%;
+}
+
 /* body */
 .all_content {
   background: #ECF1F6;
+}
+
+.fa-solid{
+  color: #ffffff;
+  font-size: 2rem;
+  padding: 0 7px 0 0
+}
+
+.fa-regular {
+  color: #ffffff;
+  font-size: 2rem;
+  padding: 0 7px 0 0
 }
 
 ul,
@@ -17,8 +37,13 @@ li {
 }
 
 /* サイドバー */
+#side{
+  fill: #fff;
+  margin: 10px 3px 0 10px;
+}
+
 .sidebar {
-  width: 150px;
+  width: 250px;
   height: 100vh;
   background-color: #03AAD2;
   font-weight: bold;
@@ -148,6 +173,10 @@ li {
 .error_message {
   font-size: 12px;
   color: red;
+}
+
+.category{
+  margin-bottom: 30px;
 }
 
 /* 掲示板 詳細画面 */

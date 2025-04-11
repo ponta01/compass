@@ -49,6 +49,17 @@ class PostsController extends Controller
     }
 
     public function postCreate(PostFormRequest $request){
+
+        $request->validate([
+            'post_category_id' => ['required', 'string', 'exists:sub_categories,id'],
+            'post_title' => ['required', 'string', 'max:100'],
+            'post_body' => ['required', 'string', 'max:2000'],],[
+		    'post_category_id.required' => 'カテゴリーは必ず入力してください。',
+		    'post_category_id.exists:sub_categories,id' => '指定されたサブカテゴリーは登録されていません。',
+		    'post_title.max' => 'タイトルは100文字以下です。',
+		    'post_body.max' => '投稿内容は2000文字以下です。',
+        ]);
+
         $post = Post::create([
             'user_id' => Auth::id(),
             'post_title' => $request->post_title,
@@ -58,6 +69,14 @@ class PostsController extends Controller
     }
 
     public function postEdit(Request $request){
+
+        $request->validate([
+            'post_title' => ['required', 'string', 'max:100'],
+            'post_body' => ['required', 'string', 'max:2000'],],[
+		    'post_title.max' => 'タイトルは100文字以下です。',
+		    'post_body.max' => '投稿内容は2000文字以下です。',
+        ]);
+
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
             'post' => $request->post_body,
@@ -70,11 +89,31 @@ class PostsController extends Controller
         return redirect()->route('post.show');
     }
     public function mainCategoryCreate(Request $request){
-        MainCategory::create(['main_category' => $request->main_category_name]);
-        return redirect()->route('post.input');
+
+        $request->validate([
+            'main_category_name' => ['required', 'string', 'max:100','unique:categories,name'],
+            'main_category_id' => ['required', 'string', 'max:2000','exists:main_categories,id'],
+            'sub_category_name' => ['required', 'string', 'max:2000','unique:sub_categories,name'],],[
+            'main_category_name.required' => 'メインカテゴリーは必ず入力してください。',
+		    'post_title.max' => 'タイトルは100文字以下です。',
+		    'main_category_name.unique' => '同じ名前のメインカテゴリーは登録できません。',
+		    'main_category_id.exists:main_categories,id' => '指定されたメインカテゴリーは登録されていません。',
+            'sub_category_name.required' => 'サブカテゴリーは必ず入力してください。',
+		    'sub_category_name.unique' => '同じ名前のサブカテゴリーは登録できません。',
+		    'post_body.max' => '投稿内容は2000文字以下です。',
+            ]);
+
+            MainCategory::create(['main_category' => $request->main_category_name]);
+            return redirect()->route('post.input');
     }
 
     public function commentCreate(Request $request){
+
+        $request->validate([
+            'comment' => ['required', 'string', 'max:250'],],[
+		    'comment.max' => 'コメントは250文字以下です。',
+        ]);
+
         PostComment::create([
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),

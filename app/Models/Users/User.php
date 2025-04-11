@@ -54,6 +54,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // ユーザーモデルとポストモデルの1対多リレーション
     public function posts(){
         return $this->hasMany('App\Models\Posts\Post');
     }
@@ -66,8 +67,9 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Calendars\ReserveSettings', 'reserve_setting_users', 'user_id', 'reserve_setting_id')->withPivot('id');
     }
 
+    // ユーザーと科目の多対多リレーション
     public function subjects(){
-        return ;// リレーションの定義
+        return $this->belongsToMany(Subjects::class, 'subject_users', 'user_id', 'subject_id');// リレーションの定義
     }
 
     // いいねしているかどうか

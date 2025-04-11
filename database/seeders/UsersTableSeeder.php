@@ -21,11 +21,12 @@ class UsersTableSeeder extends Seeder
             'under_name' => '栄一',
             'over_name_kana' => 'シブサワ',
             'under_name_kana' =>'エイイチ',
-            'mail_address' => 'eiichi@shibusawa.com',
+            'mail_address' => 'eiichi.shibusawa@atlas.com',
             'sex' => '1',
             'birth_day' => '1840-03-16',
             'role' => '1',
             'password' => Hash::make('imperial'),
         ]);
+
     }
 }

@@ -47,7 +47,20 @@ class RegisteredUserController extends Controller
             'birth_day' => ['required', 'date', 'after_or_equal:2000-01-01', 'before_or_equal:' . now()->toDateString()],
             'role' => ['required', 'integer', 'in:1,2,3,4'],
             'password' => ['required','min:8', 'max:30', 'confirmed', Rules\Password::defaults()],
-            'password_confirmation' => ['required','min:8', 'max:30','same:password'],
+            'password_confirmation' => ['required','min:8', 'max:30','same:password'],],[
+            'username.regex:/^[ァ-ヶー]+$/u' => '名前にはカタカナのみを入力してください。',
+		    'username.regex:/^[ァ-ヶー]+$/u' => '名前にはカタカナのみを入力してください。',
+		    'over_name_kana.max' => 'ユーザー名は12文字以下です。',
+		    'under_name_kana.max' => 'ユーザー名は12文字以下です。',
+		    'email.min' => 'メールアドレスは5文字以上です。',
+		    'email.email' => 'メール形式で入力してください。',
+		    'email.max' => 'メールアドレスは100文字以下です。',
+            'sex.required' => '性別を選択してください。',
+            'sex.in:1,2,3' => '男性、女性、その他は以外無効です。',
+            'birth_day.required' => '※生年月日が未入力です。',
+            'role.in:1,2,3,4' => '講師(国語)、講師(数学)、教師(英語)、生徒以外は無効です。',
+            'password.min' => 'パスワードは8文字以上です。',
+		    'password.max' => 'パスワードは30文字以下です。',
         ]);
 
         DB::beginTransaction();
@@ -80,5 +93,10 @@ class RegisteredUserController extends Controller
             DB::rollback();
             return redirect()->route('loginView');
         }
+    }
+
+    public function added(): View
+    {
+        return view('auth.added');
     }
 }
