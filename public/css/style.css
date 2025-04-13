@@ -14,6 +14,12 @@
   margin-top: 13%;
 }
 
+.error{
+  color: red;
+  font-size: small;
+  white-space: nowrap;
+}
+
 /* body */
 .all_content {
   background: #ECF1F6;
@@ -238,6 +244,29 @@ li {
 }
 
 /* 掲示板　カテゴリー */
+
+.btn-pink {
+  background-color: #ff69b4 !important;/* ピンク色 */
+  color: white;/* テキスト色 */
+  border: none;
+}
+
+.btn-yellow {
+  background-color: #CCCC66 !important;/* 黄色 */
+  color: white;/* テキスト色 */
+  border: none;
+}
+
+.btn-lightBlue {
+  background-color: #ADD8E6 !important; /* 水色 */
+  color: white;/* テキスト色 */
+  border: none;
+  width: 80%;
+  height: 30%;
+  text-align: center;
+  border-radius: 15%;
+}
+
 .category_area {
   background: #FFF;
   border-radius: 10px;
@@ -252,12 +281,13 @@ li {
 }
 
 .category_btn {
-  font-size: 12px;
+  font-size: 13px;
   border-radius: 5px;
-  padding: 0 5px;
+  padding: 8px 8px 8px 8px;
   border: none;
   background: #999;
   color: #FFF;
+  width: 40%;
 }
 
 .main_categories span,
@@ -286,6 +316,29 @@ li {
 .one_person {
   width: 250px;
   height: 250px;
+}
+
+.accordion-button{
+  border-right: solid 3px #fff;
+  border-top: solid 3px #fff;
+  content: "<";
+  display: block;
+  height: 8px;
+  width: 8px;
+  position: absolute;
+  right: 25px;
+  top: 38%;
+  -webkit-transform: rotate(135deg)!important;
+  transform: rotate(135deg)!important;
+  transition: 0.5s;
+}
+
+.accordion-button.open::after {
+  top: 45%;
+  -webkit-transform: rotate(-45deg) !important;
+  transform: rotate(-45deg) !important;
+  transition: 0.5s;
+  /* 矢印を上下反転させる */
 }
 
 .search_conditions span {

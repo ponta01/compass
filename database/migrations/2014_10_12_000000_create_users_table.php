@@ -25,7 +25,8 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('role')->index()->comment('権限'); // tinyIntegerでDB最適化
             $table->string('password', 191)->comment('パスワード');
             $table->rememberToken();
-            $table->timestamps(); // created_at と updated_at を自動で追加
+            $table->timestamps('created_at')->useCurrent();
+            $table->timestamp('updated_at')->default(DB::raw('current_timestamp on update current_timestamp')); // created_at と updated_at を自動で追加
             $table->softDeletes()->comment('削除日時'); // deleted_at を自動で追加
         });
     }

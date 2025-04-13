@@ -15,9 +15,6 @@
               </div>
             </div>
             <div class="" style="width:140px">
-              @error('over_name')
-              <div class="error"><span>{{ $message }}</span></div>
-              @enderror
               <label for="register" class=" d-block m-0" style="font-size:13px">名</label>
               <div class="border-bottom border-primary" style="width:140px;">
                 <input type="text" style="width:140px;" class="border-0 under_name" name="under_name">
@@ -45,10 +42,10 @@
             <label for="register" class="m-0 d-block" style="font-size:13px">メールアドレス</label>
             <div class="border-bottom border-primary">
               <input type="mail" class="w-100 border-0 mail_address" name="mail_address">
+            </div>
               @error('mail_address')
               <div class="error"><span>{{ $message }}</span></div>
               @enderror
-            </div>
           </div>
         </div>
         <div class="mt-3">
@@ -143,7 +140,7 @@
           </select>
           <label style="font-size:13px">日</label>
         </div>
-              @error('mail_address')
+              @error('old_year, old_month, old_day')
               <div class="error"><span>{{ $message }}</span></div>
               @enderror
         <div class="mt-3">

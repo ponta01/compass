@@ -50,10 +50,9 @@ class RegisteredUserController extends Controller
             'password_confirmation' => ['required','min:8', 'max:30','same:password'],],[
             'username.regex:/^[ァ-ヶー]+$/u' => '名前にはカタカナのみを入力してください。',
 		    'username.regex:/^[ァ-ヶー]+$/u' => '名前にはカタカナのみを入力してください。',
-		    'over_name_kana.max' => 'ユーザー名は12文字以下です。',
-		    'under_name_kana.max' => 'ユーザー名は12文字以下です。',
-		    'email.min' => 'メールアドレスは5文字以上です。',
-		    'email.email' => 'メール形式で入力してください。',
+		    'over_name_kana.max' => 'ユーザー名は30文字以下です。',
+		    'under_name_kana.max' => 'ユーザー名は30文字以下です。',
+		    'email.email' => '※メール形式で入力してください。',
 		    'email.max' => 'メールアドレスは100文字以下です。',
             'sex.required' => '性別を選択してください。',
             'sex.in:1,2,3' => '男性、女性、その他は以外無効です。',

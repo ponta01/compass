@@ -39,7 +39,7 @@ return [
     'digits_between' => 'The :attribute must be between :min and :max digits.',
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
-    'email' => ':attributeは有効なメールアドレスである必要があります。',
+    'email' => '※:attributeはメール形式で入力してください。',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
     'exists' => 'The selected :attribute is invalid.',
     'file' => 'The :attribute must be a file.',
@@ -146,10 +146,10 @@ return [
     |
     */
 
-    'attributes' => ['over_name'  => '姓',
-        'under_name' => '名',
-        'over_name_kana' => 'セイ',
-        'under_name_kana'=> 'メイ',
+    'attributes' => ['over_name'  => '名前',
+        'under_name' => '名前',
+        'over_name_kana' => 'ナマエ',
+        'under_name_kana'=> 'ナマエ',
         'mail_address' => 'メールアドレス'],
         'sex' => '性別',
         'birth_day' => '生年月日',

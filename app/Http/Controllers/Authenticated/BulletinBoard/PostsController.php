@@ -43,8 +43,9 @@ class PostsController extends Controller
         return view('authenticated.bulletinboard.post_detail', compact('post'));
     }
 
+
     public function postInput(){
-        $main_categories = MainCategory::get();
+        $main_categories = MainCategory::with('subCategories')->get();
         return view('authenticated.bulletinboard.post_create', compact('main_categories'));
     }
 
@@ -64,6 +65,7 @@ class PostsController extends Controller
             'user_id' => Auth::id(),
             'post_title' => $request->post_title,
             'post' => $request->post_body
+            // 'sub_category_id' => $validated['post_category_id'],
         ]);
         return redirect()->route('post.show');
     }
@@ -73,8 +75,11 @@ class PostsController extends Controller
         $request->validate([
             'post_title' => ['required', 'string', 'max:100'],
             'post_body' => ['required', 'string', 'max:2000'],],[
-		    'post_title.max' => 'タイトルは100文字以下です。',
-		    'post_body.max' => '投稿内容は2000文字以下です。',
+		    'post_title.max' => 'タイトルは100文字以内で記入してください。',
+		    'post_title.required' => 'タイトルは必ず入力
+            してください。',
+		    'post_body.max' => '投稿内容は2000文字以内で記入してください。',
+		    'post_body.required' => '投稿内容は必ず入力してください。',
         ]);
 
         Post::where('id', $request->post_id)->update([
@@ -111,6 +116,7 @@ class PostsController extends Controller
 
         $request->validate([
             'comment' => ['required', 'string', 'max:250'],],[
+		    'comment.required' => 'コメントは必ず入力してください。',
 		    'comment.max' => 'コメントは250文字以下です。',
         ]);
 
@@ -160,4 +166,23 @@ class PostsController extends Controller
 
         return response()->json();
     }
+
+    public function registerMainCategories()
+{
+    $categories = [
+        ['id' => 1, 'main_category' => '国語'],
+        ['id' => 2, 'main_category' => '数学'],
+        ['id' => 3, 'main_category' => '英語'],
+    ];
+
+    foreach ($categories as $category) {
+        MainCategory::updateOrCreate(
+            ['id' => $category['id']],
+            ['main_category' => $category['main_category']]
+        );
+    }
+
+    return "Main categories successfully registered!";
+}
+
 }

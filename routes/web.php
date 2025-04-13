@@ -57,6 +57,9 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('like/post/{id}', [PostsController::class, 'postLike'])->name('post.like');
             Route::post('unlike/post/{id}', [PostsController::class, 'postUnLike'])->name('post.unlike');
         });
+            Route::get('/register-main-categories', [PostsController::class, 'registerMainCategories']);
+
+
         Route::namespace('Users')->group(function(){
             Route::get('show/users', [UsersController::class, 'showUsers'])->name('user.show');
             Route::get('user/profile/{id}', [UsersController::class, 'userProfile'])->name('user.profile');

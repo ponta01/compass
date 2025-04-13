@@ -68,7 +68,7 @@
           <option value="DESC">降順</option>
         </select>
       </div>
-      <div class="">
+      <div class="accordion-button">
         <p class="m-0 search_conditions"><span>検索条件の追加</span></p>
         <div class="search_conditions_inner">
           <div>
