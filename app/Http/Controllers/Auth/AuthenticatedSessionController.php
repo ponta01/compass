@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         if (Auth::attempt($userdata)) {
             return redirect('top');
         }else{
-            return redirect('login')->with('flash_message', 'name or password is incorrect');
+            return redirect('login');
         }
     }
 

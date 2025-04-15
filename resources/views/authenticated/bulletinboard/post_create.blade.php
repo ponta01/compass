@@ -8,11 +8,11 @@
       <p class="mb-0">カテゴリー</p>
       <select class="w-100" form="postCreate" name="post_category_id">
         @foreach($main_categories as $main_category)
-        <optgroup label="{{ $main_category->main_category }}">
+        <optgroup class="main-category" label="{{ $main_category->main_category }}">
         @endforeach
           <!-- サブカテゴリー表示 -->
           @foreach($main_category->subCategories as $sub_category)
-            <option value="{{ $sub_category->id }}">{{ $sub_category->sub_category }}</option>
+            <option class="sub-category" value="{{ $sub_category->id }}">{{ $sub_category->sub_category }}</option>
           @endforeach
         </optgroup>
       </select>
@@ -47,7 +47,12 @@
         <span class="error_message">{{ $errors->first('main_category_name') }}</span>
         @endif
         <p class="m-0">メインカテゴリー</p>
-        <input type="text" class="w-100" name="main_category_name" form="mainCategoryRequest">
+        <select class="w-100" name="main_category_name" form="mainCategoryRequest">
+        @foreach($main_categories as $main_category)
+        <optgroup label="{{ $main_category->main_category }}">
+        @endforeach
+      </select>
+
         <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="mainCategoryRequest">
       </div>
       <!-- サブカテゴリー追加 -->
@@ -56,7 +61,11 @@
         <span class="error_message">{{ $errors->first('sub_category_name') }}</span>
         @endif
         <p class="m-0">サブカテゴリー</p>
-        <input type="text" class="w-100" name="sub_category_name" form="subCategoryRequest">
+        <select class="w-100" name="sub_category_name" form="subCategoryRequest">
+          @foreach($main_category->subCategories as $sub_category)
+            <option class="sub-category" value="{{ $sub_category->id }}">{{ $sub_category->sub_category }}</option>
+          @endforeach
+        </select>
         <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="subCategoryRequest">
     </div>
   </div>

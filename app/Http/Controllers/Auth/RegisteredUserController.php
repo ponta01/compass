@@ -36,8 +36,7 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
-    {
-        $request->validate([
+    {$request->validate([
             'over_name' => ['required', 'string', 'max:10'],
             'under_name' => ['required', 'string', 'max:10'],
             'over_name_kana' => ['required', 'string', 'regex:/^[ァ-ヶー]+$/u', 'max:30'],
