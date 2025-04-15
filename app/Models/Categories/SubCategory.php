@@ -13,7 +13,7 @@ class SubCategory extends Model
         'sub_category',
     ];
 
-    // メインカテゴリーと〇〇の1対多のリレーション
+    // メインカテゴリーとサブカテゴリーの1対多のリレーション
     public function mainCategory(){
         return $this->belongsTo(MainCategory::class, 'main_category_id');// リレーションの定義
     }

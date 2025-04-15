@@ -13,7 +13,7 @@ class MainCategory extends Model
         'role'
     ];
 
-    // サブカテゴリーとポストサブカテゴリーのリレーション
+    // サブカテゴリーとメインカテゴリーのリレーション
     public function subCategories(){
         return $this->hasMany(SubCategory::class, 'main_category_id');// リレーションの定義
     }

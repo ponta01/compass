@@ -17,7 +17,7 @@ class PostsController extends Controller
 {
     public function show(Request $request){
         $posts = Post::with('user', 'postComments')->get();
-        $categories = MainCategory::get();
+        $categories = MainCategory::with('subCategories')->get();
         $like = new Like;
         $post_comment = new Post;
         if(!empty($request->keyword)){
@@ -46,6 +46,7 @@ class PostsController extends Controller
 
     public function postInput(){
         $main_categories = MainCategory::with('subCategories')->get();
+        // withはモデルのメインカテゴリーと一緒に今回はリレーションをした先のリレーション名のサブカテゴリーズの値を取得するという意味。
         return view('authenticated.bulletinboard.post_create', compact('main_categories'));
     }
 
@@ -96,10 +97,8 @@ class PostsController extends Controller
     public function mainCategoryCreate(Request $request){
 
         $request->validate([
-            'main_category_name' => ['required', 'string', 'max:100','unique:categories,name'],
             'main_category_id' => ['required', 'string', 'max:2000','exists:main_categories,id'],
             'sub_category_name' => ['required', 'string', 'max:2000','unique:sub_categories,name'],],[
-            'main_category_name.required' => 'メインカテゴリーは必ず入力してください。',
 		    'post_title.max' => 'タイトルは100文字以下です。',
 		    'main_category_name.unique' => '同じ名前のメインカテゴリーは登録できません。',
 		    'main_category_id.exists:main_categories,id' => '指定されたメインカテゴリーは登録されていません。',
@@ -166,5 +165,34 @@ class PostsController extends Controller
 
         return response()->json();
     }
+
+    public function store(Request $request)
+{
+    // バリデーション
+    $request->validate([
+        'main_category_name' => ['required', 'string', 'max:100','unique:categories,name'],[
+            'main_category_name.required' => 'メインカテゴリーは必ず入力してください。']
+    ]);
+
+    // 新しいメインカテゴリーをデータベースに保存
+    $mainCategory = new MainCategory();
+    $mainCategory->main_category = $request->input('main_category_name');
+    $mainCategory->save();
+
+    return redirect()->back()->with('success', 'メインカテゴリーが追加されました！');
+}
+
+    public function getSubCategories(Request $request)
+{
+    $subCategory = new SubCategory();
+    // 空の入力欄を作ってね
+    $subCategory->sub_category = $request->input('sub_category_name');
+    // 紫はカラム名、inputタグで飛ばしてきたname属性のサブカテゴリー名をデータベースに登録。
+    $subCategory->main_category_id = $request->input('main_category_id');
+    // 今回はリレーションをした外部キーに該当するから、データベースのメインカテゴリーIDに手動でブレードのinputラグで飛ばしてきたname属性のメインカテゴリーidをデータベースに登録する。
+    $subCategory->save();
+
+    return redirect()->back()->with('success', 'サブカテゴリーが追加されました！');
+}
 
 }

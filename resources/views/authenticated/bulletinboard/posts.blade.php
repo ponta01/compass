@@ -7,6 +7,7 @@
       <p><span>{{ $post->user->over_name }}</span><span class="ml-3">{{ $post->user->under_name }}</span>さん</p>
       <p><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->post_title }}</a></p>
       <div class="post_bottom_area d-flex">
+            <span class="sub">{{ $post->user->sub_category }}</span>
         <div class="d-flex post_status">
           <div class="mr-5">
             <i class="fa fa-comment"></i><span class=""></span>
@@ -26,17 +27,23 @@
   <div class="other_area border w-25">
     <div class="border m-4">
       <div class="btn-lightBlue"><a href="{{ route('post.input') }}">投稿</a></div>
-      <div class="">
-        <input type="text" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">
-        <input type="submit" class="btn btn-primary" value="検索" form="postSearchRequest">
+      <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">
+        <span class="input-group-text" id="basic-addon2">検索</span>
       </div>
+    </div>
       <input type="submit" name="like_posts" class="category_btn btn-pink" value="いいねした投稿" form="postSearchRequest">
       <input type="submit" name="my_posts" class="category_btn btn-yellow" value="自分の投稿" style="height:50%;" form="postSearchRequest">
-      <ul>
-        @foreach($categories as $category)
+
+      @foreach($categories as $category)
+        <ul class="accordion-content">
         <li class="main_categories" category_id="{{ $category->id }}"></li>
-        @endforeach
-        <span>{{ $category->main_category }}<span>
+        <p class="accordion-button"></p>
+        <span class="main">{{ $category->main_category }}<span>
+          @foreach($category->subCategories as $subCategory)
+            <span class="sub">{{ $subCategory->sub_category }}</span>
+          @endforeach
+      @endforeach
       </ul>
     </div>
   </div>

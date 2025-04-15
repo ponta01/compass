@@ -143,6 +143,52 @@ li {
 
 /* 掲示板 */
 
+.accordion-button {
+  cursor: pointer;
+  background-color: #f0f0f0; /* 初期背景色を設定 (薄いグレー) */
+  color: #000; /* 初期文字色を設定 */
+  border: none; /* 必要に応じて境界線を消す */
+  margin-top: 20px;
+}
+
+.accordion-button::before {
+  border-right: solid 3px #000;
+  border-top: solid 3px #000;
+  content: "";
+  display: block;
+  height: 8px;
+  width: 8px;
+  position: absolute;
+  right: 10%;
+  top: 22%; /* 新しい矢印の位置 (上側) */
+  -webkit-transform: rotate(-45deg) !important; /* 矢印を反転表示 */
+  transform: rotate(-45deg) !important;
+  transition: 0.5s;
+}
+
+.accordion-button.open::before {
+  top: 22%; /* 開いた状態の矢印位置調整 */
+  -webkit-transform: rotate(135deg) !important; /* 矢印を反転 */
+  transform: rotate(135deg) !important;
+}
+
+.accordion-content {
+  position: absolute;
+  margin-top: 20px;
+  border-bottom: #000;
+}
+
+.main{
+  border-bottom: 2px solid #999; /* 下線の太さと色 */
+}
+
+.sub{
+  display: block;
+  margin-top: 10px;
+  border-bottom: 2px solid #999; /* 下線の太さと色 */
+  padding-right: 50px; /* 余白を追加して線を伸ばす */
+}
+
 .main-category{
   color: #9E9E9E;
   background-color: gainsboro;
@@ -178,7 +224,7 @@ li {
 }
 
 .post_bottom_area {
-  justify-content: space-between;
+  justify-content: right;
 }
 
 .like_btn,
@@ -197,6 +243,14 @@ li {
 }
 
 .category{
+  margin-bottom: 30px;
+}
+
+.margin{
+  margin: 5px 0 5px 0;
+}
+
+#mainCategoryRequest{
   margin-bottom: 30px;
 }
 
@@ -273,13 +327,24 @@ li {
 }
 
 .btn-lightBlue {
-  background-color: #ADD8E6 !important; /* 水色 */
-  color: white;/* テキスト色 */
+  background-color: #03AAD2 !important; /* 水色 */
+  color: #EEE;
   border: none;
   width: 80%;
   height: 30%;
   text-align: center;
   border-radius: 15%;
+}
+
+#basic-addon2{
+  color: #EEE;
+  background-color: #03AAD2;
+  border-radius: 10px;
+}
+
+.form-control{
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Add a subtle border if needed */
 }
 
 .category_area {
@@ -315,13 +380,13 @@ li {
 .reserve_users_area {
   display: flex;
   flex-wrap: wrap;
-  width: 800px;
-  margin: 10px auto;
-  height: 80vh;
+  width: 100%;
+  height: 100vh;
   overflow: scroll;
   padding: 10px;
   background: #FFF;
   border-radius: 5px;
+  background-color: #ecf1f6;
 }
 
 .reserve_users_area span {
@@ -331,30 +396,12 @@ li {
 .one_person {
   width: 250px;
   height: 250px;
+  margin: 10px 10px 10px 10px;
+  border-radius: 10px;
+  padding: 20px 20px 20px 20px;
+  background-color: white;
 }
 
-.accordion-button{
-  border-right: solid 3px #fff;
-  border-top: solid 3px #fff;
-  content: "<";
-  display: block;
-  height: 8px;
-  width: 8px;
-  position: absolute;
-  right: 25px;
-  top: 38%;
-  -webkit-transform: rotate(135deg)!important;
-  transform: rotate(135deg)!important;
-  transition: 0.5s;
-}
-
-.accordion-button.open::after {
-  top: 45%;
-  -webkit-transform: rotate(-45deg) !important;
-  transform: rotate(-45deg) !important;
-  transition: 0.5s;
-  /* 矢印を上下反転させる */
-}
 
 .search_conditions span {
   cursor: pointer;
@@ -373,4 +420,44 @@ li {
 
 .subject_inner {
   display: none;
+}
+
+.search{
+  padding: 20% 20% 5% 5%;
+}
+
+.free_word{
+  background-color: #D3D3D3;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 10px 10px 10px;
+}
+
+label, select{
+  display: block ;
+}
+
+.category-label{
+  color: #494949;
+  background-color: #D3D3D3;
+  border-radius: 10px;
+  border: none;
+  padding: 7px 7px 7px 7px;
+}
+
+.custom{
+  margin: 10px 0 10px 0;
+}
+
+.search-add{
+  text-decoration-line: underline;
+  width: 100%;
+}
+
+.profSum{
+  margin: 0% 0% 10% 0%;
+}
+
+.subjectsRegister{
+  display: flexbox;
 }

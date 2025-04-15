@@ -56,6 +56,8 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('comment/create', [PostsController::class, 'commentCreate'])->name('comment.create');
             Route::post('like/post/{id}', [PostsController::class, 'postLike'])->name('post.like');
             Route::post('unlike/post/{id}', [PostsController::class, 'postUnLike'])->name('post.unlike');
+            Route::post('/add-main-category', [PostsController::class, 'store'])->name('addMainCategory');
+            Route::post('/get-subcategories', [PostsController::class, 'getSubCategories'])->name('getSubCategory');
         });
         Route::namespace('Users')->group(function(){
             Route::get('show/users', [UsersController::class, 'showUsers'])->name('user.show');

@@ -1,5 +1,4 @@
 <x-sidebar>
-<p>ユーザー検索</p>
 <div class="search_content w-100 border d-flex">
   <div class="reserve_users_area">
     @foreach($users as $user)
@@ -52,24 +51,25 @@
   <div class="search_area w-25 border">
     <div class="">
       <div>
+        <p class="search">検索</p>
         <input type="text" class="free_word" name="keyword" placeholder="キーワードを検索" form="userSearchRequest">
       </div>
       <div>
-        <lavel>カテゴリ</lavel>
-        <select form="userSearchRequest" name="category">
+        <label class="custom">カテゴリ</label>
+        <select form="userSearchRequest" name="category" class="category-label">
           <option value="name">名前</option>
           <option value="id">社員ID</option>
         </select>
       </div>
       <div>
-        <label>並び替え</label>
-        <select name="updown" form="userSearchRequest">
+        <label class="custom">並び替え</label>
+        <select name="updown" form="userSearchRequest" class="category-label">
           <option value="ASC">昇順</option>
           <option value="DESC">降順</option>
         </select>
       </div>
       <div class="accordion-button">
-        <p class="m-0 search_conditions"><span>検索条件の追加</span></p>
+        <p class="m-0 search_conditions"><span class="search-add">検索条件の追加</span></p>
         <div class="search_conditions_inner">
           <div>
             <label>性別</label>

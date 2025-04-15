@@ -4,6 +4,14 @@ $(function () {
     $('.category_num' + category_id).slideToggle();
   });
 
+  // アコーディオンメニュー
+  $(function () {
+  $(".accordion-button").on("click", function () {
+    $(this).next().slideToggle(300);
+    $(this).toggleClass("open", 300);
+  });
+});
+
   $(document).on('click', '.like_btn', function (e) {
     e.preventDefault();
     $(this).addClass('un_like_btn');
