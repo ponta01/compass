@@ -23,10 +23,7 @@
           </div>
           <div class="d-flex mt-3" style="justify-content:space-between">
             <div class="" style="width:140px">
-              @error('over_name')
-              <div class="error"><span>{{ $message }}</span></div>
-              @enderror
-              <label for="register" class="d-block m-0" style="font-size:13px">セイ</label>
+              <label class="d-block m-0" style="font-size:13px">セイ</label>
               <div class="border-bottom border-primary" style="width:140px;">
                 <input type="text" style="width:140px;" class="border-0 over_name_kana" name="over_name_kana">
               </div>
@@ -57,7 +54,7 @@
           <label style="font-size:13px">その他</label>
         </div>
         <div class="mt-3">
-          <label for="register" class="d-block m-0 aa" style="font-size:13px">生年月日</label>
+          <label class="d-block m-0 aa" style="font-size:13px">生年月日</label>
           <select class="old_year" name="old_year">
             <option value="none">-----</option>
             <option value="1985">1985</option>

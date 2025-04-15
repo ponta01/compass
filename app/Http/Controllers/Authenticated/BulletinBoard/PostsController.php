@@ -167,22 +167,4 @@ class PostsController extends Controller
         return response()->json();
     }
 
-    public function registerMainCategories()
-{
-    $categories = [
-        ['id' => 1, 'main_category' => '国語'],
-        ['id' => 2, 'main_category' => '数学'],
-        ['id' => 3, 'main_category' => '英語'],
-    ];
-
-    foreach ($categories as $category) {
-        MainCategory::updateOrCreate(
-            ['id' => $category['id']],
-            ['main_category' => $category['main_category']]
-        );
-    }
-
-    return "Main categories successfully registered!";
-}
-
 }
