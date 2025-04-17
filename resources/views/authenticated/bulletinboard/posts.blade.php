@@ -7,7 +7,7 @@
       <p><span>{{ $post->user->over_name }}</span><span class="ml-3">{{ $post->user->under_name }}</span>さん</p>
       <p><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->post_title }}</a></p>
       <div class="post_bottom_area d-flex">
-            <span class="sub">{{ $post->user->sub_category }}</span>
+            <span class="sub">{{ $post->sub_category }}</span>
         <div class="d-flex post_status">
           <div class="mr-5">
             <i class="fa fa-comment"></i><span class=""></span>
@@ -33,18 +33,18 @@
       </div>
     </div>
       <input type="submit" name="like_posts" class="category_btn btn-pink" value="いいねした投稿" form="postSearchRequest">
-      <input type="submit" name="my_posts" class="category_btn btn-yellow" value="自分の投稿" style="height:50%;" form="postSearchRequest">
+      <input type="submit" name="my_posts" class="category_btn btn-yellow" value="自分の投稿" form="postSearchRequest">
 
-      @foreach($categories as $category)
-        <ul class="accordion-content">
+      <ul class="accordion-content">
+        @foreach($categories as $category)
         <li class="main_categories" category_id="{{ $category->id }}"></li>
-        <p class="accordion-button"></p>
+        <p class class="accordion-button"></p>
         <span class="main">{{ $category->main_category }}<span>
           @foreach($category->subCategories as $subCategory)
             <span class="sub">{{ $subCategory->sub_category }}</span>
           @endforeach
-      @endforeach
-      </ul>
+        @endforeach
+</ul>
     </div>
   </div>
   <form action="{{ route('post.show') }}" method="get" id="postSearchRequest"></form>

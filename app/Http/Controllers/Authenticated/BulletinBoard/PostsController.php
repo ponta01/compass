@@ -83,6 +83,8 @@ class PostsController extends Controller
 		    'post_body.required' => '投稿内容は必ず入力してください。',
         ]);
 
+        $post = Post::where('user_id', Auth::id())->get(); // 自分の投稿のみ取得
+
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
             'post' => $request->post_body,
