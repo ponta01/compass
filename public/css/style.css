@@ -143,12 +143,20 @@ li {
 
 /* 掲示板 */
 
+.accordion-item{
+  position: relative;
+  margin-top: 10%;
+}
+
 .accordion-button {
+  position: absolute;
+  top: -25px;
+  right: 130px;
   cursor: pointer;
-  background-color: #f0f0f0; /* 初期背景色を設定 (薄いグレー) */
   color: #000; /* 初期文字色を設定 */
   border: none; /* 必要に応じて境界線を消す */
-  margin-top: 20px;
+  margin: 40px 0 0 0;
+  padding-left: 5px;
 }
 
 .accordion-button::before {
@@ -158,12 +166,12 @@ li {
   display: block;
   height: 8px;
   width: 8px;
-  position: absolute;
   right: 10%;
   top: 22%; /* 新しい矢印の位置 (上側) */
   -webkit-transform: rotate(-45deg) !important; /* 矢印を反転表示 */
   transform: rotate(-45deg) !important;
   transition: 0.5s;
+  margin: 0 10px 10px 10px;
 }
 
 .accordion-button.open::before {
@@ -172,10 +180,93 @@ li {
   transform: rotate(135deg) !important;
 }
 
-.accordion-content {
-  position: absolute;
-  margin-top: 20px;
-  border-bottom: #000;
+/* 一旦マネして作るからユーザ―検索をおきます。 */
+
+.subject_edit_btn{
+  cursor: pointer;
+  color: #03aad2 !important;
+  border: none;
+  margin: 40px 0 0 0;
+  padding-left: 5px;
+}
+
+.subject_edit_btn::before {
+  color: #03aad2 !important;
+  border-right: solid 3px #000;
+  border-top: solid 3px #000;
+  content: "";
+  display: block;
+  height: 8px;
+  width: 8px;
+  right: 10%;
+  top: 22%;
+  margin: 0 0 -20px 120px;
+  /* 新しい矢印の位置 (上側) */
+  -webkit-transform: rotate(-45deg) !important;
+  /* 矢印を反転表示 */
+  transform: rotate(-45deg) !important;
+  transition: 0.5s;
+}
+
+.subject_edit_btn.open::before {
+  /* 開いた状態の矢印位置調整 */
+  -webkit-transform: rotate(135deg) !important;
+  /* 矢印を反転 */
+  transform: rotate(135deg) !important;
+}
+
+.search-add{
+  color: darkblue;
+  border-bottom: 2px solid #999;
+  display: inline-block;
+  width: 80%;
+  margin-left: 10px;
+}
+
+.accordion_button {
+  cursor: pointer;
+  color: #000;
+  border: none;
+  margin: 40px 0 0 0;
+  padding-left: 5px;
+}
+
+.accordion_button::before {
+  border-right: solid 3px #000;
+  border-top: solid 3px #000;
+  content: "";
+  display: block;
+  height: 8px;
+  width: 8px;
+  right: 10%;
+  top: 22%;
+  /* 新しい矢印の位置 (上側) */
+  -webkit-transform: rotate(-45deg) !important;
+  /* 矢印を反転表示 */
+  transform: rotate(-45deg) !important;
+  transition: 0.5s;
+  margin: 0pc 0px -15px 200px;
+}
+
+.accordion_button.open::before {
+  /* 開いた状態の矢印位置調整 */
+  -webkit-transform: rotate(135deg) !important;
+  /* 矢印を反転 */
+  transform: rotate(135deg) !important;
+}
+/* あとで場所を変えます。 */
+
+.accordion-content{
+  width: 50%;
+  padding-left: 10%;
+}
+
+.mainCategory{
+  margin: 10px 0 0 30px;
+  color: black;
+  border-bottom: 2px solid #999;
+  display: inline-block;
+  width: 60%;
 }
 
 .main{
@@ -328,18 +419,23 @@ li {
 
 .btn-lightBlue {
   background-color: #03AAD2 !important; /* 水色 */
-  color: #EEE;
+  color: #EEE !important;
   border: none;
-  width: 80%;
-  height: 30%;
+  width: 100%;
+  height: 20%;
   text-align: center;
-  border-radius: 15%;
+  padding: 10px 10px 10px 10px;
+  border-radius: 10px;
 }
 
 #basic-addon2{
   color: #EEE;
   background-color: #03AAD2;
   border-radius: 10px;
+}
+
+.subcategory-title{
+  margin: 10px 10px 10px 10px;
 }
 
 .form-control{
@@ -387,6 +483,7 @@ li {
   background: #FFF;
   border-radius: 5px;
   background-color: #ecf1f6;
+  align-content: space-between;
 }
 
 .reserve_users_area span {
@@ -400,6 +497,8 @@ li {
   border-radius: 10px;
   padding: 20px 20px 20px 20px;
   background-color: white;
+  flex-basis: calc(25% - 20px);
+  min-height: 200px;
 }
 
 
@@ -413,17 +512,36 @@ li {
 }
 
 .subject_edit_btn {
-  font-size: 12px;
-  color: #0000FF;
+  font-size: 15px;
+  color: #03aad2;
   cursor: pointer;
 }
 
-.subject_inner {
-  display: none;
+.subject_inner div {
+  display: inline-flex;
+}
+
+.japanese{
+  margin: 10px 10px 10px 10px;
+}
+
+.japanese label {
+    min-width: 38px; /* ラベルの最小幅を統一 */
+    text-align: left; /* 左揃えにする */
+}
+
+.check{
+  justify-content: center;
+  margin: 10px 10px 10px 10px;
 }
 
 .search{
-  padding: 20% 20% 5% 5%;
+  padding: 20% 20% 0 5%;
+  color: darkblue;
+}
+.content{
+  color: darkblue;
+  margin: 10px 0 0 10px;
 }
 
 .free_word{
@@ -431,6 +549,7 @@ li {
   border-radius: 10px;
   border: none;
   padding: 10px 10px 10px 10px;
+  margin-left: 10px;
 }
 
 label, select{
@@ -443,15 +562,54 @@ label, select{
   border-radius: 10px;
   border: none;
   padding: 7px 7px 7px 7px;
+  margin-left: 10px;
 }
 
 .custom{
-  margin: 10px 0 10px 0;
+  margin: 10px 0 10px 10px;
+  color: darkblue;
 }
 
-.search-add{
-  text-decoration-line: underline;
-  width: 100%;
+.sex_margin{
+  margin: 10px 10px 10px 10px;
+}
+
+.engineer{
+  background-color: #D3D3D3;
+  border-radius: 10px;
+  border: none;
+  padding: 7px 7px 7px 7px;
+  margin-left: 10px;
+}
+
+.subject-margin{
+  margin: 10px 10px 10px 10px;
+}
+
+.searchBtn{
+  all: unset;
+  color: #EEE;
+  background-color: #03AAD2;
+  border-radius: 10px;
+  width: 70%;
+  height: 40%;
+  padding: 10px 10px 10px 10px;
+  text-align: center;
+  margin: 30px 0 0 20px;
+}
+
+.search_area{
+  position: relative;
+}
+
+
+.reset{
+  all: unset;
+  color: #03AAD2;
+  text-align: center;
+  position: absolute;
+  top: 80%;
+  left: 30%;
 }
 
 .profSum{
@@ -460,4 +618,12 @@ label, select{
 
 .subjectsRegister{
   display: flexbox;
+}
+
+.selected_engineer{
+  background-color: #ecf1f6;
+}
+
+.math{
+  margin: 0 7px 0 7px;
 }

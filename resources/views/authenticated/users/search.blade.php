@@ -68,17 +68,20 @@
           <option value="DESC">降順</option>
         </select>
       </div>
-      <div class="accordion-button">
+      <div class="accordion_button">
         <p class="m-0 search_conditions"><span class="search-add">検索条件の追加</span></p>
         <div class="search_conditions_inner">
-          <div>
-            <label>性別</label>
+          <div class="selected_engineer">
+            <label class="content">性別</label>
+            <br>
+            <div class="sex-margin">
             <span>男</span><input type="radio" name="sex" value="1" form="userSearchRequest">
             <span>女</span><input type="radio" name="sex" value="2" form="userSearchRequest">
             <span>その他</span><input type="radio" name="sex" value="3" form="userSearchRequest">
+            </div>
           </div>
-          <div>
-            <label>権限</label>
+          <div class="selected_engineer">
+            <label class="content">権限</label>
             <select name="role" form="userSearchRequest" class="engineer">
               <option selected disabled>----</option>
               <option value="1">教師(国語)</option>
@@ -88,15 +91,20 @@
             </select>
           </div>
           <div class="selected_engineer">
-            <label>選択科目</label>
+            <label class="content">選択科目</label>
+            <div class="subject-margin">
+            <span class="math">国語</span><input type="checkbox" name="subject" value="1" form="userSearchRequest">
+            <span class="math">数学</span><input type="checkbox" name="subject" value="2" form="userSearchRequest">
+            <span class="math">英語</span><input type="checkbox" name="subject" value="3" form="userSearchRequest">
+            </div>
           </div>
         </div>
       </div>
       <div>
-        <input type="reset" value="リセット" form="userSearchRequest">
+        <input type="reset" class="reset" value="リセット" form="userSearchRequest">
       </div>
       <div>
-        <input type="submit" name="search_btn" value="検索" form="userSearchRequest">
+        <input type="submit" class="searchBtn" name="search_btn" value="検索" form="userSearchRequest">
       </div>
     </div>
     <form action="{{ route('user.show') }}" method="get" id="userSearchRequest"></form>

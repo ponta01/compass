@@ -7,10 +7,13 @@
       <p><span>{{ $post->user->over_name }}</span><span class="ml-3">{{ $post->user->under_name }}</span>さん</p>
       <p><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->post_title }}</a></p>
       <div class="post_bottom_area d-flex">
-            <span class="sub">{{ $post->post_sub_categories->sub_category }}</span>
+          @foreach($post->subCategories as $subCategory)
+            <span class="subcategory-title">{{ $subCategory->sub_category }}</span>
+          @endforeach
+          <!-- リレーションの配列の時はforeachの中でリレーションをして中はそのまま記述 -->
         <div class="d-flex post_status">
           <div class="mr-5">
-            <i class="fa fa-comment"></i><span class=""></span>
+            <i class="fa fa-comment"></i><span class="comment_counts{{$post->id}}"></span>
           </div>
           <div>
             @if(Auth::user()->is_Like($post->id))
@@ -35,16 +38,18 @@
       <input type="submit" name="like_posts" class="category_btn btn-pink" value="いいねした投稿" form="postSearchRequest">
       <input type="submit" name="my_posts" class="category_btn btn-yellow" value="自分の投稿" form="postSearchRequest">
 
-      <ul class="accordion-content">
+      <div class="accordion-container">
         @foreach($categories as $category)
-        <li class="main_categories" category_id="{{ $category->id }}"></li>
-        <p class class="accordion-button"></p>
-        <span class="main">{{ $category->main_category }}<span>
+        <div class="accordion-item">
+          <span class="mainCategory">{{ $category->main_category }}</span>
+          <button class="accordion-button" data-category-category_id="{{ $category->id }}"></button>
+        <div class="accordion-content">
           @foreach($category->subCategories as $subCategory)
             <span class="sub">{{ $subCategory->sub_category }}</span>
           @endforeach
+          </div>
+        </div>
         @endforeach
-</ul>
     </div>
   </div>
   <form action="{{ route('post.show') }}" method="get" id="postSearchRequest"></form>

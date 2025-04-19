@@ -18,9 +18,9 @@
         <div class="subject_inner">
           <form action="{{ route('user.edit') }}" method="post">
             @foreach($subject_lists as $subject_list)
-            <div>
+            <div class="japanese">
               <label>{{ $subject_list->subject }}</label>
-              <input type="checkbox" name="subjects[]" value="{{ $subject_list->id }}">
+              <input type="checkbox" class="check" name="subjects[]" value="{{ $subject_list->id }}">
             </div>
             @endforeach
             <input type="submit" value="登録" class="btn btn-primary">

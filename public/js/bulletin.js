@@ -12,6 +12,7 @@ $(function () {
   });
 });
 
+
   $(document).on('click', '.like_btn', function (e) {
     e.preventDefault();
     $(this).addClass('un_like_btn');

@@ -17,7 +17,7 @@ use Auth;
 class PostsController extends Controller
 {
     public function show(Request $request){
-        $posts = Post::with('user', 'postComments')->get();
+        $posts = Post::with('user', 'postComments','subCategories')->get();
         $categories = MainCategory::with('subCategories')->get();
         $like = new Like;
         $post_comment = new Post;
@@ -137,12 +137,14 @@ class PostsController extends Controller
 		    'comment.max' => 'コメントは250文字以下です。',
         ]);
 
-        PostComment::create([
+        $comment = PostComment::create([
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),
-            'comment' => $request->comment
+            'comment' => $request->comment,
         ]);
-        return redirect()->route('post.detail', ['id' => $request->post_id]);
+
+        return response()->json(['message' => 'Comment created', 'comment' => $comment]);
+        // return redirect()->route('post.detail', ['id' => $request->post_id]);
     }
 
     public function myBulletinBoard(){
