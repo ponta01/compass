@@ -3,6 +3,7 @@
 namespace App\Models\Categories;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Posts\Post;
 
 class SubCategory extends Model
 {
@@ -18,7 +19,9 @@ class SubCategory extends Model
         return $this->belongsTo(MainCategory::class, 'main_category_id');// リレーションの定義
     }
 
+    // サブカテゴリーとポストサブカテゴリーの多対多リレーション
     public function posts(){
-        return $this->hasMany(Post::class, 'sub_category_id');// リレーションの定義
-    }
+        return $this->belongsToMany(Post::class, 'post_sub_categories', 'sub_category_id', 'post_id');
+}
+
 }

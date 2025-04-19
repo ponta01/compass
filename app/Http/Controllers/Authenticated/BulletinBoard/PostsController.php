@@ -11,6 +11,7 @@ use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
+use Illuminate\Support\Facades\DB; // DBファサードのインポート
 use Auth;
 
 class PostsController extends Controller
@@ -62,13 +63,28 @@ class PostsController extends Controller
 		    'post_body.max' => '投稿内容は2000文字以下です。',
         ]);
 
-        $post = Post::create([
-            'user_id' => Auth::id(),
-            'post_title' => $request->post_title,
-            'post' => $request->post_body
-            // 'sub_category_id' => $validated['post_category_id'],
-        ]);
-        return redirect()->route('post.show');
+        DB::beginTransaction();
+        try{
+
+            $post = Post::create([
+                'user_id' => Auth::id(),
+                'post_title' => $request->post_title,
+                'post' => $request->post_body,
+            ]);
+
+            $post_id = $post->id;
+            $sub_category_id = $request->post_category_id;
+
+            // 多対多のリレーションを利用して中間テーブルに登録
+            $post->subCategories()->attach($post_category_id);
+
+            DB::commit();
+            return view('authenticated.bulletinboard.post_create');
+        }catch(\Exception $e){
+            DB::rollback();
+            return redirect()->route('post.show');
+        }
+
     }
 
     public function postEdit(Request $request){
