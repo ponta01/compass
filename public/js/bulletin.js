@@ -20,6 +20,7 @@ $(function () {
     var post_id = $(this).attr('post_id');
     var count = $('.like_counts' + post_id).text();
     var countInt = Number(count);
+
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       method: "post",

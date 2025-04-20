@@ -152,55 +152,42 @@ class PostsController extends Controller
     }
 
     public function myBulletinBoard(){
-        $posts = Auth::user()->posts()->get();
-        $like = new Like;
-        return view('authenticated.bulletinboard.post_myself', compact('posts', 'like'));
-    }
+         $posts = Auth::user()->posts()->get();
+         $like = new Like;
+         return view('authenticated.bulletinboard.post_myself', compact('posts', 'like'));
+     }
 
-    public function likeBulletinBoard(){
-        // 現在のユーザーが「いいね」した投稿IDを取得
-        $like_post_id = Like::where('like_user_id', Auth::id())->pluck('like_post_id')->toArray();
-        $posts = Post::with('user')->whereIn('id', $like_post_id)->get();
-        $like = new Like;
-        return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
-    }
+     public function likeBulletinBoard(){
+         $like_post_id = Like::with('users')->where('like_user_id', Auth::id())->get('like_post_id')->toArray();
+         $posts = Post::with('user')->whereIn('id', $like_post_id)->get();
+         $like = new Like;
+         return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
+     }
 
-    public function postLike(Request $request){
-        $user_id = Auth::id();
-        $post_id = $request->post_id;
+     public function postLike(Request $request){
+         $user_id = Auth::id();
+         $post_id = $request->post_id;
 
-        $like = new Like;
+         $like = new Like;
 
-        $like->like_user_id = $user_id;
-        $like->like_post_id = $post_id;
-        $like->save();
+         $like->like_user_id = $user_id;
+         $like->like_post_id = $post_id;
+         $like->save();
 
-        $likeCounts = Like::where('like_post_id', $post_id)->count();
-        $commentCounts = Comment::where('post_id', $post_id)->count(); // コメント数を取得
+         return response()->json();
+     }
 
-        return response()->json([
-        'like_counts' => $likeCounts,
-        'comment_counts' => $commentCounts,
-    ]);
-    }
+     public function postUnLike(Request $request){
+         $user_id = Auth::id();
+         $post_id = $request->post_id;
 
-    public function postUnLike(Request $request){
-        $user_id = Auth::id();
-        $post_id = $request->post_id;
+         $like = new Like;
 
-        $like = new Like;
+         $like->where('like_user_id', $user_id)
+              ->where('like_post_id', $post_id)
+              ->delete();
 
-        $like->where('like_user_id', $user_id)
-             ->where('like_post_id', $post_id)
-             ->delete();
-
-        $likeCounts = Like::where('like_post_id', $post_id)->count();
-        $commentCounts = Comment::where('post_id', $post_id)->count();
-
-        return response()->json([
-        'like_counts' => $likeCounts,
-        'comment_counts' => $commentCounts,
-    ]);
+         return response()->json();
 }
 
     public function store(Request $request)

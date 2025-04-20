@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
+
 use DB;
 
 use App\Models\Users\Subjects;
@@ -37,38 +39,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'over_name' => ['required', 'string', 'max:10'],
-            'under_name' => ['required', 'string', 'max:10'],
-            'over_name_kana' => ['required', 'string', 'regex:/^[ァ-ヶー]+$/u', 'max:30'],
-            'under_name_kana' => ['required', 'string', 'regex:/^[ァ-ヶー]+$/u', 'max:30'],
-            'mail_address' => ['required', 'email', 'max:100', 'unique:users'],
-            'sex' => ['required', 'integer', 'in:1,2,3'],
-            'birth_day' => ['required', 'date', 'after_or_equal:2000-01-01', Rule::beforeOrEqual(now()->toDateString()) ],
-            'role' => ['required', 'integer', 'in:1,2,3,4'],
-            'password' => ['required','min:8', 'max:30', 'confirmed', Rules\Password::defaults()],
-            'password_confirmation' => ['required','min:8', 'max:30','same:password'],],[
-            'username.regex:/^[ァ-ヶー]+$/u' => '名前にはカタカナのみを入力してください。',
-		    'username.regex:/^[ァ-ヶー]+$/u' => '名前にはカタカナのみを入力してください。',
-		    'over_name_kana.max' => 'ユーザー名は30文字以下です。',
-		    'under_name_kana.max' => 'ユーザー名は30文字以下です。',
-		    'email.email' => '※メール形式で入力してください。',
-		    'email.max' => 'メールアドレスは100文字以下です。',
-            'sex.required' => '性別を選択してください。',
-            'sex.in:1,2,3' => '男性、女性、その他は以外無効です。',
-            'birth_day.required' => '※生年月日が未入力です。',
-            'role.in:1,2,3,4' => '講師(国語)、講師(数学)、教師(英語)、生徒以外は無効です。',
-            'password.min' => 'パスワードは8文字以上です。',
-		    'password.max' => 'パスワードは30文字以下です。',
-        ]);
 
-        // 必要に応じてデータ消去
-        if ($validatedData['version'] === 'Laravel 9.x') {
-        $validatedData['version'] = null; // 初期値を消去
-    }
-
-        // データ保存などの処理
-        // YourModel::create($validatedData);
 
         DB::beginTransaction();
         try{
@@ -98,7 +69,7 @@ class RegisteredUserController extends Controller
             return view('auth.login.login');
         }catch(\Exception $e){
             DB::rollback();
-            return redirect()->route('loginView');
+            return redirect()->route('registerView');
         }
     }
 

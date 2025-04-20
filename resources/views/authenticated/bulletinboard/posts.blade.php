@@ -29,7 +29,7 @@
   </div>
   <div class="other_area border w-25">
     <div class="border m-4">
-      <div class="btn-lightBlue"><a href="{{ route('post.input') }}">投稿</a></div>
+      <div class="btn-lightBlue"><a class="postBtn" href="{{ route('post.input') }}" >投稿</a></div>
       <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">
         <span class="input-group-text" id="basic-addon2">検索</span>

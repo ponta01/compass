@@ -409,6 +409,7 @@ li {
   background-color: #ff69b4 !important;/* ピンク色 */
   color: white;/* テキスト色 */
   border: none;
+  margin: 0 0 0 30px;
 }
 
 .btn-yellow {
@@ -419,13 +420,17 @@ li {
 
 .btn-lightBlue {
   background-color: #03AAD2 !important; /* 水色 */
-  color: #EEE !important;
   border: none;
   width: 100%;
   height: 20%;
   text-align: center;
   padding: 10px 10px 10px 10px;
   border-radius: 10px;
+  margin: 0 0 20px 0;
+}
+
+.postBtn{
+  color: #ffffff !important;
 }
 
 #basic-addon2{

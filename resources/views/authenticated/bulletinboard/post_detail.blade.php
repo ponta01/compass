@@ -13,14 +13,12 @@
           <div>
           </div>
 
-          @foreach($post as $value)
           <div>
-            @if(isset($value->user_id) && $value->user_id === Auth::id())
-            <span class="edit-modal-open" post_title="{{ $value->post_title }}" post_body="{{ $value->post }}" post_id="{{ $value->id }}">編集</span>
-            <a href="{{ route('post.delete', ['id' => $value->id]) }}" onclick="return confirm('削除してよろしいですか？');">削除</a>
+            @if(isset($post->user_id) && $post->user_id === Auth::id())
+            <span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
+            <a href="{{ route('post.delete', ['id' => $post->id]) }}" onclick="return confirm('削除してよろしいですか？');">削除</a>
             @endif
           </div>
-          @endforeach
 
         </div>
 
