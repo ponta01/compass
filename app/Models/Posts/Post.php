@@ -22,6 +22,7 @@ class Post extends Model
         return $this->belongsTo('App\Models\Users\User');
     }
 
+    // postテーブルとpostCommentの1対多のリレーション
     public function postComments(){
         return $this->hasMany('App\Models\Posts\PostComment');
     }
@@ -33,7 +34,14 @@ class Post extends Model
 
 
     // コメント数
+    // public function commentCounts($post_id){
+    //     return Post::with('postComments')->find($post_id)->postComments();
+    // }
+
+
     public function commentCounts($post_id){
-        return Post::with('postComments')->find($post_id)->postComments();
-    }
+    $post = Post::with('postComments')->find($post_id);
+    return $post ? $post->postComments->count() : 0; // Return 0 if no post or comments exist
+}
+
 }

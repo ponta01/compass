@@ -17,6 +17,7 @@ class PostComment extends Model
         'comment',
     ];
 
+    // postテーブルとpostCommentの1対多のリレーション
     public function post(){
         return $this->belongsTo('App\Models\Posts\Post');
     }

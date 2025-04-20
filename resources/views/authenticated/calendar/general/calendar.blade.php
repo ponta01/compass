@@ -5,6 +5,7 @@
 
       <p class="text-center">{{ $calendar->getTitle() }}</p>
       <div class="">
+
         <a href="javascript:void(0);" class="open-modal">{!! $calendar->render() !!}</a>
         <!-- モーダル構造 -->
           <div id="deleteModal" class="custom-modal">
@@ -19,6 +20,7 @@
             </div>
           </div>
       </div>
+
     </div>
     <div class="text-right w-75 m-auto">
       <input type="submit" class="btn btn-primary" value="予約する" form="reserveParts">

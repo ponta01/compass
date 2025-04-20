@@ -1,25 +1,25 @@
 <x-sidebar>
 <div class="board_area w-100 border m-auto d-flex">
   <div class="post_view w-75 mt-5">
-    <p class="w-75 m-auto">投稿一覧</p>
+    <p class="w-75 m-auto"></p>
     @foreach($posts as $post)
     <div class="post_area border w-75 m-auto p-3">
-      @foreach($post->subCategories as $subCategory)
-          <span class="subcategory-title">{{ $subCategory->sub_category }}</span>
-      @endforeach
       <p class="subtitle"><span>{{ $post->user->over_name }}</span><span class="ml-3">{{ $post->user->under_name }}</span>さん</p>
       <p><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->post_title }}</a></p>
+        @foreach($post->subCategories as $subCategory)
+          <span class="subcategoryTitle">{{ $subCategory->sub_category }}</span>
+        @endforeach
       <div class="post_bottom_area d-flex">
           <!-- リレーションの配列の時はforeachの中でリレーションをして中はそのまま記述 -->
         <div class="d-flex post_status">
           <div class="mr-5">
-            <i class="fa fa-comment"></i><span class="comment_counts{{$post->id}}"></span>
+            <i class="fa fa-comment"></i><span class="comment_counts{{$post->id}}">{{$post->postComments->count() }}</span>
           </div>
           <div>
             @if(Auth::user()->is_Like($post->id))
-            <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span></p>
+            <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span>{{$like->count() }}</p>
             @else
-            <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span></p>
+            <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span>{{$like->count() }}</p>
             @endif
           </div>
         </div>

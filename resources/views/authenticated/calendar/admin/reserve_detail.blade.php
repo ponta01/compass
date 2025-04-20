@@ -1,7 +1,13 @@
 <x-sidebar>
 <div class="vh-100 d-flex" style="align-items:center; justify-content:center;">
   <div class="w-50 m-auto h-75">
-    <p><span>日</span><span class="ml-3">部</span></p>
+    <p><span>日</span>
+    @if($isPastDate)
+        <p class="status text-danger">受付終了</p>
+    @else
+        <p class="status text-success">受付中</p>
+    @endif
+    <span class="ml-3">部</span></p>
     <div class="h-75 border">
       <table class="">
         <tr class="text-center">

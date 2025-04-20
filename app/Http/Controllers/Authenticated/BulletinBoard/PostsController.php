@@ -169,12 +169,14 @@ class PostsController extends Controller
          $post_id = $request->post_id;
 
          $like = new Like;
-
          $like->like_user_id = $user_id;
          $like->like_post_id = $post_id;
          $like->save();
 
-         return response()->json();
+         $likeCounts = Like::where('like_post_id', $post_id)->count();
+
+         return response()->json(['like_counts' => $likeCounts,
+        ]);
      }
 
      public function postUnLike(Request $request){
@@ -187,7 +189,11 @@ class PostsController extends Controller
               ->where('like_post_id', $post_id)
               ->delete();
 
-         return response()->json();
+        $likeCounts = Like::where('like_post_id', $post_id)->count();
+
+         return response()->json([
+        'like_counts' => $likeCounts,
+    ]);
 }
 
     public function store(Request $request)

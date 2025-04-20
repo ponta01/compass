@@ -16,19 +16,23 @@
           <div>
             @if(isset($post->user_id) && $post->user_id === Auth::id())
             <span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
-            <a href="{{ route('post.delete', ['id' => $post->id]) }}" onclick="return confirm('削除してよろしいですか？');">削除</a>
+            <a href="{{ route('post.delete', ['id' => $post->id]) }}" class="deleteBtn" onclick="return confirm('削除してよろしいですか？');">削除</a>
             @endif
           </div>
 
         </div>
 
         <div class="contributor d-flex">
-          <p>
-            <span>{{ $post->user->over_name }}</span>
-            <span>{{ $post->user->under_name }}</span>
+            @foreach($post->subCategories as $subCategory)
+              <span class="subcategory-title">{{ $subCategory->sub_category }}</span>
+            @endforeach
+            <p class="margin-left">
+              <br><br>
+              <span>{{ $post->user->over_name }}</span>
+              <span>{{ $post->user->under_name }}</span>
             さん
-          </p>
-          <span class="ml-5">{{ $post->created_at }}</span>
+            </p>
+              <span class="ml-5">{{ $post->created_at }}</span>
         </div>
         <div class="detsail_post_title">{{ $post->post_title }}</div>
         <div class="mt-3 detsail_post">{{ $post->post }}</div>

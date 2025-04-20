@@ -280,6 +280,11 @@ li {
   padding-right: 50px; /* 余白を追加して線を伸ばす */
 }
 
+.reserve-content{
+  color: #9E9E9E;
+  background-color: gainsboro;
+}
+
 .main-category{
   color: #9E9E9E;
   background-color: gainsboro;
@@ -368,6 +373,16 @@ li {
 
 .edit-modal-open {
   cursor: pointer;
+  font-size: small;
+  color: #FFF;
+  background-color: #007bff !important; /* 水色 */
+  border: none;
+  width: 100%;
+  height: 20%;
+  text-align: center;
+  padding: 7px 7px 7px 7px;
+  border-radius: 5px;
+  margin: 0 0 20px 0;
 }
 
 .modal-inner-body textarea {
@@ -378,6 +393,21 @@ li {
 .edit-modal-btn {
   justify-content: space-between;
 }
+
+.deleteBtn{
+  cursor: pointer;
+  font-size: small;
+  color: #FFF;
+  background-color: #dc3545 !important; /* 水色 */
+  border: none;
+  width: 100%;
+  height: 20%;
+  text-align: center;
+  padding: 7px 7px 7px 7px;
+  border-radius: 5px;
+  margin: 0 0 20px 0;
+}
+
 
 /* 掲示板 コメント */
 .comment_container {
@@ -440,10 +470,15 @@ li {
 }
 
 .subtitle{
-  margin: 10px 0 15px 0;
+  margin: 10px 0 15px 10px;
 }
 
-.subcategory-title{
+.margin-left{
+  position: relative;
+  margin-left: 10px;
+}
+
+.subcategoryTitle{
   background-color: #03AAD2 !important; /* 水色 */
   font-size: x-small;
   color: #EEE !important;
@@ -454,6 +489,20 @@ li {
   padding: 5px 5px 5px 5px;
   border-radius: 10px;
   margin: 10px 10px 10px 10px;
+}
+
+.subcategory-title{
+  position: absolute;
+  background-color: #03AAD2 !important; /* 水色 */
+  font-size: x-small;
+  color: #EEE !important;
+  border: none;
+  width: 2%;
+  height: 3%;
+  text-align: center;
+  padding: 5px 5px 5px 5px;
+  border-radius: 10px;
+  margin: 10px 10px 20px 10px;
 }
 
 .form-control{
@@ -550,13 +599,23 @@ li {
 
 .check{
   justify-content: center;
-  margin: 10px 10px 10px 10px;
+  margin: 10px 10px 10px 0px;
 }
 
 .search{
   padding: 20% 20% 0 5%;
   color: darkblue;
 }
+
+.bold{
+  font-weight: bold;
+}
+
+.gray{
+  font-weight: bold;
+  color: #999;
+}
+
 .content{
   color: darkblue;
   margin: 10px 0 0 10px;
@@ -590,6 +649,11 @@ label, select{
 
 .sex_margin{
   margin: 10px 10px 10px 10px;
+  margin-left: 10px;
+}
+
+.man{
+  margin-left: 10px;
 }
 
 .engineer{
@@ -625,9 +689,7 @@ label, select{
   all: unset;
   color: #03AAD2;
   text-align: center;
-  position: absolute;
-  top: 80%;
-  left: 30%;
+  margin: 30px 0 0 100px;
 }
 
 .profSum{
