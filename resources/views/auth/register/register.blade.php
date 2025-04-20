@@ -6,7 +6,7 @@
           <div class="d-flex mt-3" style="justify-content:space-between">
             <div class="" style="width:140px">
               <!-- バリデーションエラーメッセージ表示 -->
-              @error('over_name')
+              @error('over_name', 'under_name')
               <div class="error"><span>{{ $message }}</span></div>
               @enderror
               <label for="register" class="d-block m-0" style="font-size:13px">姓</label>
@@ -23,7 +23,10 @@
           </div>
           <div class="d-flex mt-3" style="justify-content:space-between">
             <div class="" style="width:140px">
-              <label class="d-block m-0" style="font-size:13px">セイ</label>
+              @error('over_name')
+              <div class="error"><span>{{ $message }}</span></div>
+              @enderror
+              <label for="register" class="d-block m-0" style="font-size:13px">セイ</label>
               <div class="border-bottom border-primary" style="width:140px;">
                 <input type="text" style="width:140px;" class="border-0 over_name_kana" name="over_name_kana">
               </div>
@@ -38,7 +41,7 @@
           <div class="mt-3">
             <label for="register" class="m-0 d-block" style="font-size:13px">メールアドレス</label>
             <div class="border-bottom border-primary">
-              <input type="mail" class="w-100 border-0 mail_address" name="mail_address">
+              <input type="mail" class="w-100 border-0 mail_address" name="mail_address" value="{{ old('version') }}">
             </div>
               @error('mail_address')
               <div class="error"><span>{{ $message }}</span></div>
@@ -54,7 +57,7 @@
           <label style="font-size:13px">その他</label>
         </div>
         <div class="mt-3">
-          <label class="d-block m-0 aa" style="font-size:13px">生年月日</label>
+          <label for="register" class="d-block m-0 aa" style="font-size:13px">生年月日</label>
           <select class="old_year" name="old_year">
             <option value="none">-----</option>
             <option value="1985">1985</option>
@@ -84,7 +87,7 @@
             <option value="2009">2009</option>
             <option value="2010">2010</option>
           </select>
-          <label style="font-size:13px">年</label>
+          <label  style="font-size:13px">年</label>
           <select class="old_month" name="old_month">
             <option value="none">-----</option>
             <option value="01">1</option>

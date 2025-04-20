@@ -44,7 +44,7 @@ class RegisteredUserController extends Controller
             'under_name_kana' => ['required', 'string', 'regex:/^[ァ-ヶー]+$/u', 'max:30'],
             'mail_address' => ['required', 'email', 'max:100', 'unique:users'],
             'sex' => ['required', 'integer', 'in:1,2,3'],
-            'birth_day' => ['required', 'date', 'after_or_equal:2000-01-01', 'before_or_equal:' . now()->toDateString()],
+            'birth_day' => ['required', 'date', 'after_or_equal:2000-01-01', Rule::beforeOrEqual(now()->toDateString()) ],
             'role' => ['required', 'integer', 'in:1,2,3,4'],
             'password' => ['required','min:8', 'max:30', 'confirmed', Rules\Password::defaults()],
             'password_confirmation' => ['required','min:8', 'max:30','same:password'],],[
@@ -61,6 +61,14 @@ class RegisteredUserController extends Controller
             'password.min' => 'パスワードは8文字以上です。',
 		    'password.max' => 'パスワードは30文字以下です。',
         ]);
+
+        // 必要に応じてデータ消去
+        if ($validatedData['version'] === 'Laravel 9.x') {
+        $validatedData['version'] = null; // 初期値を消去
+    }
+
+        // データ保存などの処理
+        // YourModel::create($validatedData);
 
         DB::beginTransaction();
         try{

@@ -26,8 +26,10 @@
                 <p class="barIcon"><a href="{{ route('top.show') }}"><i class="fa-solid fa-house-chimney"></i>マイページ</a></p>
                 <p class="barIcon"><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>ログアウト</a></p>
                 <p class="barIcon"><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}"><i class="fa-regular fa-calendar-minus"></i>スクール予約</a></p>
+                @if(Auth::user()->role != 4)
                 <p class="barIcon"><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}"><i class="fa-solid fa-calendar-week"></i>スクール予約確認</a></p>
                 <p class="barIcon"><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}"><i class="fa-regular fa-calendar-plus"></i>スクール枠登録</a></p>
+                @endif
                 <p class="barIcon"><a href="{{ route('post.show') }}"><i class="fa-regular fa-comment"></i>掲示板</a></p>
                 <p class="barIcon"><a href="{{ route('user.show') }}"><i class="fa-solid fa-users"></i>ユーザー検索</a></p>
             </div>

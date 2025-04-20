@@ -5,7 +5,19 @@
 
       <p class="text-center">{{ $calendar->getTitle() }}</p>
       <div class="">
-        {!! $calendar->render() !!}
+        <a href="javascript:void(0);" class="open-modal">{!! $calendar->render() !!}</a>
+        <!-- モーダル構造 -->
+          <div id="deleteModal" class="custom-modal">
+            <div class="modal-content">
+              <div class="modal-body">
+                <p>上記の予約をキャンセルしてもよろしいですか？</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn cancel-modal">閉じる</button>
+                <a href="{{ route('deleteParts') }}" class="btn btn-danger">キャンセル</a>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
     <div class="text-right w-75 m-auto">

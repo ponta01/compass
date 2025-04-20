@@ -2,6 +2,7 @@
 
 return [
 
+
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines
@@ -79,7 +80,7 @@ return [
     'max' => [
         'numeric' => 'The :attribute may not be greater than :max.',
         'file' => 'The :attribute may not be greater than :max kilobytes.',
-        'string' => ':attribute は最大10文字を超えてはいけません',
+        'string' => ':attributeは最大10文字を超えてはいけません',
         'array' => 'The :attribute may not have more than :max items.',
     ],
     'mimes' => 'The :attribute must be a file of type: :values.',
@@ -130,8 +131,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'main_category_name' => [
+            'string' => 'メインカテゴリーは最大100文字を超えてはいけません。',
         ],
     ],
 
@@ -146,20 +147,23 @@ return [
     |
     */
 
-    'attributes' => ['over_name'  => '名前',
-        'under_name' => '名前',
-        'over_name_kana' => 'ナマエ',
-        'under_name_kana'=> 'ナマエ',
-        'mail_address' => 'メールアドレス'],
-        'sex' => '性別',
-        'birth_day' => '生年月日',
-        'role'=> '権限',
-        'password' => 'パスワード',
-        'post_category_id' => 'カテゴリー',
-        'post_title' => 'タイトル',
-        'post_body' => '投稿内容',
-        'main_category_name' => 'メインカテゴリー',
-        'main_category_id' => 'メインカテゴリー',
-        'sub_category_name' => 'サブカテゴリー',
-        'comment' => 'コメント',
+    'attributes' => [
+    'over_name' => '名前',
+    'under_name' => '名前',
+    'over_name_kana' => 'ナマエ',
+    'under_name_kana' => 'ナマエ',
+    'mail_address' => 'メールアドレス',
+    'sex' => '性別',
+    'birth_day' => '生年月日',
+    'role' => '権限',
+    'password' => 'パスワード',
+    'post_category_id' => 'カテゴリー',
+    'post_title' => 'タイトル',
+    'post_body' => '投稿内容',
+    'main_category_name' => 'メインカテゴリー',
+    'main_category_id' => 'メインカテゴリー',
+    'sub_category_name' => 'サブカテゴリー',
+    'comment' => 'コメント',
+],
+
 ];

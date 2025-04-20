@@ -63,6 +63,8 @@ class PostsController extends Controller
 		    'post_body.max' => '投稿内容は2000文字以下です。',
         ]);
 
+        $main_categories = MainCategory::with('subCategories')->get(); // リレーションを利用して取得
+
         DB::beginTransaction();
         try{
 
@@ -76,14 +78,15 @@ class PostsController extends Controller
             $sub_category_id = $request->post_category_id;
 
             // 多対多のリレーションを利用して中間テーブルに登録
-            $post->subCategories()->attach($post_category_id);
+            $post->subCategories()->attach($sub_category_id);
 
             DB::commit();
-            return view('authenticated.bulletinboard.post_create');
-        }catch(\Exception $e){
+            // ビューにデータを渡して表示
+            return view('authenticated.bulletinboard.post_create', compact('main_categories'));
+            } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('post.show');
-        }
+            return redirect()->route('post.show')->with('error', $e->getMessage());
+            }
 
     }
 
@@ -105,7 +108,8 @@ class PostsController extends Controller
             'post_title' => $request->post_title,
             'post' => $request->post_body,
         ]);
-        return redirect()->route('post.detail', ['id' => $request->post_id]);
+
+        return view('authenticated.bulletinboard.post_detail', compact('post'));
     }
 
     public function postDelete($id){
@@ -154,7 +158,8 @@ class PostsController extends Controller
     }
 
     public function likeBulletinBoard(){
-        $like_post_id = Like::with('users')->where('like_user_id', Auth::id())->get('like_post_id')->toArray();
+        // 現在のユーザーが「いいね」した投稿IDを取得
+        $like_post_id = Like::where('like_user_id', Auth::id())->pluck('like_post_id')->toArray();
         $posts = Post::with('user')->whereIn('id', $like_post_id)->get();
         $like = new Like;
         return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
@@ -170,7 +175,13 @@ class PostsController extends Controller
         $like->like_post_id = $post_id;
         $like->save();
 
-        return response()->json();
+        $likeCounts = Like::where('like_post_id', $post_id)->count();
+        $commentCounts = Comment::where('post_id', $post_id)->count(); // コメント数を取得
+
+        return response()->json([
+        'like_counts' => $likeCounts,
+        'comment_counts' => $commentCounts,
+    ]);
     }
 
     public function postUnLike(Request $request){
@@ -183,16 +194,30 @@ class PostsController extends Controller
              ->where('like_post_id', $post_id)
              ->delete();
 
-        return response()->json();
-    }
+        $likeCounts = Like::where('like_post_id', $post_id)->count();
+        $commentCounts = Comment::where('post_id', $post_id)->count();
+
+        return response()->json([
+        'like_counts' => $likeCounts,
+        'comment_counts' => $commentCounts,
+    ]);
+}
 
     public function store(Request $request)
 {
+    $existingNames = MainCategory::pluck('main_category')->toArray();
     // バリデーション
     $request->validate([
-        'main_category_name' => ['required', 'string', 'max:100','unique:categories,name'],[
-            'main_category_name.required' => 'メインカテゴリーは必ず入力してください。']
-    ]);
+    'main_category_name' => ['required', 'string', 'max:100', function ($attribute, $value, $fail) use ($existingNames) {
+        if (in_array($value, $existingNames)) {
+            $fail('このメインカテゴリー名はすでに登録されています。');
+        }
+    }]
+], [
+    'main_category_name.required' => 'メインカテゴリーは必ず入力してください。',
+    'main_category_name.string' => 'メインカテゴリーは文字列でなければなりません。',
+    'main_category_name.max:100' => 'メインカテゴリーは最大100文字を超えてはいけません。',
+]);
 
     // 新しいメインカテゴリーをデータベースに保存
     $mainCategory = new MainCategory();
@@ -204,6 +229,18 @@ class PostsController extends Controller
 
     public function getSubCategories(Request $request)
 {
+    $existingNames = SubCategory::pluck('sub_category')->toArray();
+    // バリデーション
+    $request->validate([
+    'sub_category_name' => ['required', 'string', 'max:100', function ($attribute, $value, $fail) use ($existingNames) {
+        if (in_array($value, $existingNames)) {
+            $fail('このサブカテゴリー名はすでに登録されています。');
+        }
+    }]
+], [
+    'sub_category_name.required' => 'サブカテゴリーは必ず入力してください。','sub_category_name.string' => 'サブカテゴリーは文字列でなければなりません。','sub_category_name.max:100' => 'サブカテゴリーは最大100文字を超えてはいけません。',
+]);
+
     $subCategory = new SubCategory();
     // 空の入力欄を作ってね
     $subCategory->sub_category = $request->input('sub_category_name');

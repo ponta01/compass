@@ -434,7 +434,20 @@ li {
   border-radius: 10px;
 }
 
+.subtitle{
+  margin: 10px 0 15px 0;
+}
+
 .subcategory-title{
+  background-color: #03AAD2 !important; /* 水色 */
+  font-size: x-small;
+  color: #EEE !important;
+  border: none;
+  width: 100%;
+  height: 20%;
+  text-align: center;
+  padding: 5px 5px 5px 5px;
+  border-radius: 10px;
   margin: 10px 10px 10px 10px;
 }
 
@@ -626,4 +639,73 @@ label, select{
 
 .math{
   margin: 0 7px 0 7px;
+}
+
+.mordal-content{
+  all:unset;
+  font-size: large !important;
+}
+
+/* モーダル全体の背景 */
+.custom-modal {
+  display: none;
+  /* 初期状態で非表示 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* 背景を暗く */
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+/* モーダル本体 */
+.modal-content {
+  background: #fff;
+  border-radius: 5px;
+  width: 400px;
+  max-width: 90%;
+  padding: 20px;
+  position: relative;
+}
+
+/* ヘッダー部分 */
+
+
+.modal-header h5 {
+  margin: 0;
+}
+
+.modal-header .close-modal {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* モーダルボタン */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: #fff;
+}
+
+.cancel-modal {
+  background: #6c757d;
+  color: #fff;
 }

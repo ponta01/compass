@@ -51,9 +51,9 @@ $(function () {
         post_id: $(this).attr('post_id'),
       },
     }).done(function (res) {
-      $('.like_counts' + post_id).text(countInt - 1);
+      $('.like_counts' + post_id).text(countInt - 1);$('.comment_counts' + post_id).text(res.comment_counts);
     }).fail(function () {
-
+      console.log('fail');
     });
   });
 
