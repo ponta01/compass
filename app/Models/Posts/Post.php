@@ -38,10 +38,15 @@ class Post extends Model
     //     return Post::with('postComments')->find($post_id)->postComments();
     // }
 
+//     public function commentCounts($post_id){
+//     $post = Post::with('postComments')->find($post_id);
+//     return $post ? $post->postComments->count() : 0; // Return 0 if no post or comments exist
+// }
 
     public function commentCounts($post_id){
-    $post = Post::with('postComments')->find($post_id);
-    return $post ? $post->postComments->count() : 0; // Return 0 if no post or comments exist
+    // Fetch the post and count the related comments
+    return Post::find($post_id)?->postComments()->count() ?? 0;
 }
+
 
 }

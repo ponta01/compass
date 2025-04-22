@@ -44,13 +44,13 @@
           <button class="accordion-button" data-category-category_id="{{ $category->id }}"></button>
         <div class="accordion-content">
           @foreach($category->subCategories as $subCategory)
-            <span class="sub">{{ $subCategory->sub_category }}</span>
+            <span class="sub clickable-sub" data-keyword="{{ $subCategory->sub_category }}">{{ $subCategory->sub_category }}</span>
           @endforeach
           </div>
         </div>
         @endforeach
     </div>
   </div>
-  <form action="{{ route('post.show') }}" name="keyword" method="get" id="postSearchRequest"></form>
+  <form action="{{ route('post.show') }}" name="keyword" method="get" id="postSearchRequest"><input type="hidden" name="keyword" id="keywordField"></form>
 </div>
 </x-sidebar>

@@ -4,7 +4,6 @@
     @foreach($users as $user)
     <div class="border one_person">
       <div>
-        <form action="{{ route('user.show') }}" method="get" id="userSearchRequest">
         <span class="gray">ID : </span><span class="bold">{{ $user->id }}</span>
       </div>
       <div><span class="gray">名前 : </span>
@@ -18,7 +17,6 @@
         <span class="bold">({{ $user->over_name_kana }}</span>
         <span class="bold">{{ $user->under_name_kana }})</span>
       </div>
-      </form>
       <div>
         @if($user->sex == 1)
         <span class="gray">性別 : </span><span class="bold">男</span>

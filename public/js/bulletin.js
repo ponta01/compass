@@ -78,3 +78,22 @@ $(function () {
   });
 
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Add click event listener to all clickable sub-category elements
+    document.querySelectorAll(".clickable-sub").forEach(function (element) {
+        element.addEventListener("click", function (event) {
+            // Prevent the click event from bubbling up to the accordion
+            event.stopPropagation();
+
+            // Get the sub_category ID from the data-keyword attribute
+            const subCategoryId = this.getAttribute("data-keyword");
+
+            // Set the subCategoryId value in the hidden input field
+            document.getElementById("keywordField").value = subCategoryId;
+
+            // Submit the form
+            document.getElementById("postSearchRequest").submit();
+        });
+    });
+});

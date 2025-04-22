@@ -19,26 +19,25 @@ class PostsController extends Controller
 
     public function search(Request $request){
         // キーワードを取得
-        $keyword = $request->input('keyword');
+        $subcategory = $request->input('keyword');
 
-        // 2つ目の処理
-        if (empty($keyword)) {
+        if (empty($subcategory)) {
+        // No keyword: retrieve all posts
         $results = Post::with('user', 'subCategories', 'postComments')->get();
         } else {
-        // Filter posts associated with subcategories matching the keyword
-        $results = Post::where(function ($query) use ($keyword) {
-            $query->whereHas('subCategories', function ($query) use ($keyword) {
-                $query->whereRaw('LOWER(sub_category) = ?', [strtolower(trim($keyword))]);
-            })
-                ->orWhere('post_title', 'LIKE', "%{$keyword}%")
-                ->orWhere('post_body', 'LIKE', "%{$keyword}%");
-            })
-                ->with('user', 'subCategories', 'postComments')
-                ->get();
+        // Filter posts associated with the given subcategory ID
+        $results = SubCategory::whereHas('post_sub_categories', function ($q) use ($subcategory) {
+            $q->where('post_sub_categories.sub_category', '=', $subcategory); // Filter by subcategory ID
+        })
+        ->with('user', 'subCategories', 'postComments') // Load related data
+        ->get();
     }
         // 3つ目の処理
-        return view('authenticated.bulletinboard.posts',['keyword'=>$keyword, 'posts'=>$results]);
-    }
+        return view('authenticated.bulletinboard.posts', [
+        'keyword' => $subcategoryId,
+        'posts' => $results
+    ]);
+}
 
     public function show(Request $request){
         $posts = Post::with('user', 'postComments','subCategories')->get();
@@ -116,25 +115,14 @@ class PostsController extends Controller
 
     public function postEdit(Request $request){
 
-        $request->validate([
-            'post_title' => ['required', 'string', 'max:100'],
-            'post_body' => ['required', 'string', 'max:2000'],],[
-		    'post_title.max' => 'タイトルは100文字以内で記入してください。',
-		    'post_title.required' => 'タイトルは必ず入力
-            してください。',
-		    'post_body.max' => '投稿内容は2000文字以内で記入してください。',
-		    'post_body.required' => '投稿内容は必ず入力してください。',
-        ]);
+         Post::where('id', $request->post_id)->update([
+             'post_title' => $request->post_title,
+             'post' => $request->post_body,
+         ]);
 
-        $post = Post::where('user_id', Auth::id())->get(); // 自分の投稿のみ取得
-
-        Post::where('id', $request->post_id)->update([
-            'post_title' => $request->post_title,
-            'post' => $request->post_body,
-        ]);
-
-        return view('authenticated.bulletinboard.post_detail', compact('post'));
-    }
+         $post = Post::where('user_id', Auth::id())->get(); // 自分の投稿のみ取得
+         return redirect()->route('post.detail', ['id' => $request->post_id]);
+     }
 
     public function postDelete($id){
         Post::findOrFail($id)->delete();
@@ -165,17 +153,14 @@ class PostsController extends Controller
 		    'comment.max' => 'コメントは250文字以下です。',
         ]);
 
-        $comment = PostComment::create([
+         PostComment::create([
+
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),
-            'comment' => $request->comment,
-        ]);
-
-        $comment->load('commentUser');
-
-        return response()->json(['message' => 'Comment created', 'comment' => $comment]);
-        // return redirect()->route('post.detail', ['id' => $request->post_id]);
-    }
+            'comment' => $request->comment
+         ]);
+         return redirect()->route('post.detail', ['id' => $request->post_id]);
+     }
 
     public function myBulletinBoard(){
          $posts = Auth::user()->posts()->get();

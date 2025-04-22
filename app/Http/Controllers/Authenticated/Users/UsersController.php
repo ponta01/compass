@@ -30,7 +30,7 @@ class UsersController extends Controller
         public function search(Request $request){
         // キーワードを取得
         $keyword = $request->input('keyword');
-        dd($keyword);
+
         // 2つ目の処理
         if (empty($keyword)) {
         $results = User::all(); // または空のコレクションを返す
