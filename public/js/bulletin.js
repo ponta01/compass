@@ -15,11 +15,15 @@ $(function () {
 
   $(document).on('click', '.like_btn', function (e) {
     e.preventDefault();
-    $(this).addClass('un_like_btn');
-    $(this).removeClass('like_btn');
-    var post_id = $(this).attr('post_id');
+    var $this = $(this); // キャッシュ化
+    $this.addClass('un_like_btn');
+    $this.removeClass('like_btn');
+    var post_id = $this.attr('post_id');
+
+    // 既存の「like_counts」取得と変換
     var count = $('.like_counts' + post_id).text();
     var countInt = Number(count);
+
 
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },

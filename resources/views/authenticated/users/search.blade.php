@@ -4,6 +4,7 @@
     @foreach($users as $user)
     <div class="border one_person">
       <div>
+        <form action="{{ route('user.show') }}" method="get" id="userSearchRequest">
         <span class="gray">ID : </span><span class="bold">{{ $user->id }}</span>
       </div>
       <div><span class="gray">名前 : </span>
@@ -17,6 +18,7 @@
         <span class="bold">({{ $user->over_name_kana }}</span>
         <span class="bold">{{ $user->under_name_kana }})</span>
       </div>
+      </form>
       <div>
         @if($user->sex == 1)
         <span class="gray">性別 : </span><span class="bold">男</span>
@@ -42,7 +44,11 @@
       </div>
       <div>
         @if($user->role == 4)
-        <span class="gray">選択科目 :</span>
+        <span class="gray">選択科目 :</span><span class="bold">国語</span>
+        @elseif($user->$subjects == 2)
+        <span class="gray">選択科目 :</span><span class="bold">数学</span>
+        @else
+        <span class="gray">選択科目 :</span><span class="bold">英語</span>
         @endif
       </div>
     </div>
@@ -69,7 +75,7 @@
         </select>
       </div>
       <div class="accordion_button">
-        <p class="m-0 search_conditions"><span class="search-add">検索条件の追加</span></p>
+        <p class="m-0 search_conditions"><span class="search-add accordion_arrow">検索条件の追加</span></p>
         <div class="search_conditions_inner">
           <div class="selected_engineer">
             <label class="content">性別</label>

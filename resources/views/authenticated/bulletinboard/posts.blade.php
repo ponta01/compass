@@ -19,7 +19,7 @@
             @if(Auth::user()->is_Like($post->id))
             <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span>{{$like->count() }}</p>
             @else
-            <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span>{{$like->count() }}</p>
+            <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{$like->count() }}</span></p>
             @endif
           </div>
         </div>
@@ -31,8 +31,7 @@
     <div class="border m-4">
       <div class="btn-lightBlue"><a class="postBtn" href="{{ route('post.input') }}" >投稿</a></div>
       <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">
-        <span class="input-group-text" id="basic-addon2">検索</span>
+        <input type="text" class="form-control" placeholder="キーワードを検索" name="keyword" form="postSearchRequest"><button type="submit" class="input-group-text" id="basic-addon2" form="postSearchRequest">検索</button>
       </div>
     </div>
       <input type="submit" name="like_posts" class="category_btn btn-pink" value="いいねした投稿" form="postSearchRequest">
@@ -52,6 +51,6 @@
         @endforeach
     </div>
   </div>
-  <form action="{{ route('post.show') }}" method="get" id="postSearchRequest"></form>
+  <form action="{{ route('post.show') }}" name="keyword" method="get" id="postSearchRequest"></form>
 </div>
 </x-sidebar>

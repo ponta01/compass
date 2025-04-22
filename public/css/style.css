@@ -223,15 +223,20 @@ li {
   margin-left: 10px;
 }
 
-.accordion_button {
+.accordion_arrow {
   cursor: pointer;
   color: #000;
   border: none;
   margin: 40px 0 0 0;
   padding-left: 5px;
+  color: darkblue;
+  border-bottom: 2px solid #999;
+  display: inline-block;
+  width: 80%;
+  margin-left: 10px;
 }
 
-.accordion_button::before {
+.accordion_arrow::before {
   border-right: solid 3px #000;
   border-top: solid 3px #000;
   content: "";
@@ -248,7 +253,7 @@ li {
   margin: 0pc 0px -15px 200px;
 }
 
-.accordion_button.open::before {
+.accordion_arrow.open::before {
   /* 開いた状態の矢印位置調整 */
   -webkit-transform: rotate(135deg) !important;
   /* 矢印を反転 */
@@ -708,11 +713,6 @@ label, select{
   margin: 0 7px 0 7px;
 }
 
-.mordal-content{
-  all:unset;
-  font-size: large !important;
-}
-
 /* モーダル全体の背景 */
 .custom-modal {
   display: none;
@@ -734,9 +734,10 @@ label, select{
   background: #fff;
   border-radius: 5px;
   width: 400px;
-  max-width: 90%;
+  max-width: 50%;
   padding: 20px;
   position: relative;
+  font-size: large !important;
 }
 
 /* ヘッダー部分 */
@@ -773,6 +774,16 @@ label, select{
 }
 
 .cancel-modal {
-  background: #6c757d;
   color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 4px 4px 4px 4px;
+  border-radius: .25rem;
+  height: 3%;
+  width: 15%;
+  margin: 0 40% 0 0;
+}
+
+.btn-btn{
+  margin-right: 50%;
 }

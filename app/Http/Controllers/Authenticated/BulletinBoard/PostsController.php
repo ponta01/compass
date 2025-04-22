@@ -16,6 +16,30 @@ use Auth;
 
 class PostsController extends Controller
 {
+
+    public function search(Request $request){
+        // キーワードを取得
+        $keyword = $request->input('keyword');
+
+        // 2つ目の処理
+        if (empty($keyword)) {
+        $results = Post::with('user', 'subCategories', 'postComments')->get();
+        } else {
+        // Filter posts associated with subcategories matching the keyword
+        $results = Post::where(function ($query) use ($keyword) {
+            $query->whereHas('subCategories', function ($query) use ($keyword) {
+                $query->whereRaw('LOWER(sub_category) = ?', [strtolower(trim($keyword))]);
+            })
+                ->orWhere('post_title', 'LIKE', "%{$keyword}%")
+                ->orWhere('post_body', 'LIKE', "%{$keyword}%");
+            })
+                ->with('user', 'subCategories', 'postComments')
+                ->get();
+    }
+        // 3つ目の処理
+        return view('authenticated.bulletinboard.posts',['keyword'=>$keyword, 'posts'=>$results]);
+    }
+
     public function show(Request $request){
         $posts = Post::with('user', 'postComments','subCategories')->get();
         $categories = MainCategory::with('subCategories')->get();
@@ -146,6 +170,8 @@ class PostsController extends Controller
             'user_id' => Auth::id(),
             'comment' => $request->comment,
         ]);
+
+        $comment->load('commentUser');
 
         return response()->json(['message' => 'Comment created', 'comment' => $comment]);
         // return redirect()->route('post.detail', ['id' => $request->post_id]);
