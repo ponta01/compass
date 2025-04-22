@@ -14,6 +14,15 @@
   border: none;
   border-bottom: 1px solid #0000FF;
   width: 25%;
+  justify-content: center;
+}
+
+.old_month {
+  border: none;
+  border-bottom: 1px solid #0000FF;
+  width: 25%;
+  justify-content: center;
+  margin-left: 20px;
 }
 
 #atlas{
@@ -178,16 +187,16 @@ li {
   width: 8px;
   right: 10%;
   top: 22%; /* 新しい矢印の位置 (上側) */
-  -webkit-transform: rotate(-45deg) !important; /* 矢印を反転表示 */
-  transform: rotate(-45deg) !important;
+  -webkit-transform: rotate(-135deg) !important; /* 矢印を反転表示 */
+  transform: rotate(-135deg) !important;
   transition: 0.5s;
   margin: 0 10px 10px 10px;
 }
 
 .accordion-button.open::before {
   top: 22%; /* 開いた状態の矢印位置調整 */
-  -webkit-transform: rotate(135deg) !important; /* 矢印を反転 */
-  transform: rotate(135deg) !important;
+  -webkit-transform: rotate(45deg) !important; /* 矢印を反転 */
+  transform: rotate(45deg) !important;
 }
 
 /* 一旦マネして作るからユーザ―検索をおきます。 */
@@ -202,8 +211,8 @@ li {
 
 .subject_edit_btn::before {
   color: #03aad2 !important;
-  border-right: solid 3px #000;
-  border-top: solid 3px #000;
+  border-right: solid 3px #03aad2;
+  border-top: solid 3px #03aad2;
   content: "";
   display: block;
   height: 8px;
@@ -256,18 +265,18 @@ li {
   right: 10%;
   top: 22%;
   /* 新しい矢印の位置 (上側) */
-  -webkit-transform: rotate(-45deg) !important;
+  -webkit-transform: rotate(135deg) !important;
   /* 矢印を反転表示 */
-  transform: rotate(-45deg) !important;
+  transform: rotate(135deg) !important;
   transition: 0.5s;
   margin: 0pc 0px -15px 200px;
 }
 
 .accordion_arrow.open::before {
   /* 開いた状態の矢印位置調整 */
-  -webkit-transform: rotate(135deg) !important;
+  -webkit-transform: rotate(-45deg) !important;
   /* 矢印を反転 */
-  transform: rotate(135deg) !important;
+  transform: rotate(-45deg) !important;
 }
 /* あとで場所を変えます。 */
 
@@ -482,6 +491,8 @@ li {
   color: #EEE;
   background-color: #03AAD2;
   border-radius: 10px;
+  width: 30% !important;
+  justify-content: center;
 }
 
 .subtitle{
@@ -521,7 +532,10 @@ li {
 }
 
 .form-control{
-  background-color: transparent;
+  all: unset;
+  background-color: #ecf1f6 !important;
+  border-radius: 10px !important;
+  width: 10% !important;
   border: 1px solid rgba(0, 0, 0, 0.1); /* Add a subtle border if needed */
 }
 
@@ -540,12 +554,12 @@ li {
 
 .category_btn {
   font-size: 13px;
-  border-radius: 5px;
-  padding: 8px 8px 8px 8px;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
   border: none;
   background: #999;
   color: #FFF;
-  width: 40%;
+  width: 42%;
 }
 
 .main_categories span,
@@ -594,8 +608,8 @@ li {
 }
 
 .subject_edit_btn {
+  color: #03aad2 !important;
   font-size: 15px;
-  color: #03aad2;
   cursor: pointer;
 }
 
@@ -605,6 +619,7 @@ li {
 
 .japanese{
   margin: 10px 10px 10px 10px;
+  align-items: baseline;
 }
 
 .japanese label {

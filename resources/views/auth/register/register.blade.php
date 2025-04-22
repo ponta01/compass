@@ -79,7 +79,7 @@
             <option value="2010">2010</option>
           </select>
           <label style="font-size:13px">年</label>
-          <select class="old_year" name="old_month">
+          <select class="old_month" name="old_month">
             <option value="none">-----</option>
             <option value="01">1</option>
             <option value="02">2</option>
@@ -95,7 +95,7 @@
             <option value="12">12</option>
           </select>
           <label style="font-size:13px">月</label>
-          <select class="old_year" name="old_day">
+          <select class="old_month" name="old_day">
             <option value="none">-----</option>
             <option value="01">1</option>
             <option value="02">2</option>
