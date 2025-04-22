@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('user/profile/{id}', [UsersController::class, 'userProfile'])->name('user.profile');
             Route::post('user/profile/edit', [UsersController::class, 'userEdit'])->name('user.edit');
             Route::post('user/profile/search', [UsersController::class, 'search'])->name('user.search');
+            Route::post('validation/check', 'FormController@postValidates');
 
         });
     });

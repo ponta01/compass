@@ -187,16 +187,16 @@ li {
   width: 8px;
   right: 10%;
   top: 22%; /* 新しい矢印の位置 (上側) */
-  -webkit-transform: rotate(-135deg) !important; /* 矢印を反転表示 */
-  transform: rotate(-135deg) !important;
+  -webkit-transform: rotate(-45deg) !important; /* 矢印を反転表示 */
+  transform: rotate(-45deg) !important;
   transition: 0.5s;
   margin: 0 10px 10px 10px;
 }
 
 .accordion-button.open::before {
   top: 22%; /* 開いた状態の矢印位置調整 */
-  -webkit-transform: rotate(45deg) !important; /* 矢印を反転 */
-  transform: rotate(45deg) !important;
+  -webkit-transform: rotate(135deg) !important; /* 矢印を反転 */
+  transform: rotate(135deg) !important;
 }
 
 /* 一旦マネして作るからユーザ―検索をおきます。 */
