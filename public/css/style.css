@@ -6,6 +6,16 @@
   padding: 0;
 }
 
+.flex{
+  display: flex;
+}
+
+.old_year{
+  border: none;
+  border-bottom: 1px solid #0000FF;
+  width: 25%;
+}
+
 #atlas{
   margin: 10% 35% 5% 45%
 }

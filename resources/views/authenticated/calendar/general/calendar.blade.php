@@ -9,11 +9,12 @@
         <a href="javascript:void(0);" class="open-modal">{!! $calendar->render() !!}</a>
 
         <!-- モーダル構造 -->
+        @if(Auth::user()->reservations()->exists())
           <div id="deleteModal" class="custom-modal">
             <div class="modal-content">
               <div class="modal-body">
-                <p>時間 :</p>
                 <p>予約日 :</p>
+                <p>時間 :</p>
                 <p>上記の予約をキャンセルしてもよろしいですか？</p>
               </div>
               <div class="modal-footer">
@@ -22,6 +23,7 @@
               </div>
             </div>
           </div>
+        @endif
       </div>
 
     </div>

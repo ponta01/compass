@@ -95,12 +95,14 @@
             </select>
           </div>
           <div class="selected_engineer">
+            @can('admin')
             <label class="content">選択科目</label>
             <div class="subject-margin">
             <span class="math">国語</span><input type="checkbox" name="subject" value="1" form="userSearchRequest">
             <span class="math">数学</span><input type="checkbox" name="subject" value="2" form="userSearchRequest">
             <span class="math">英語</span><input type="checkbox" name="subject" value="3" form="userSearchRequest">
             </div>
+            @endcan
           </div>
         </div>
       </div>
