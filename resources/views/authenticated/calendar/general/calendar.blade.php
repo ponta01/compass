@@ -9,7 +9,7 @@
         <a href="javascript:void(0);" class="open-modal">{!! $calendar->render() !!}</a>
 
         <!-- モーダル構造 -->
-        @if(Auth::user()->reservations()->exists())
+        @if(Auth::user()->reserveSettings()->exists())
           <div id="deleteModal" class="custom-modal">
             <div class="modal-content">
               <div class="modal-body">

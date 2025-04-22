@@ -39,8 +39,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-
-
         DB::beginTransaction();
         try{
             $old_year = $request->old_year;
@@ -49,6 +47,7 @@ class RegisteredUserController extends Controller
             $data = $old_year . '-' . $old_month . '-' . $old_day;
             $birth_day = date('Y-m-d', strtotime($data));
             $subjects = $request->subject;
+            dd($subjects);
 
             $user_get = User::create([
                 'over_name' => $request->over_name,
