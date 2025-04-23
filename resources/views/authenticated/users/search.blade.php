@@ -42,11 +42,13 @@
       </div>
       <div>
         @if($user->role == 4)
-        <span class="gray">選択科目 :</span><span class="bold">国語</span>
-        @elseif($user->$subjects == 2)
-        <span class="gray">選択科目 :</span><span class="bold">数学</span>
-        @else
-        <span class="gray">選択科目 :</span><span class="bold">英語</span>
+        <span class="gray">選択科目 :</span>
+        <span class="bold">
+                @foreach($user->subjects as $subject)
+                {{ $subject->subject }}
+                @endforeach
+        </span>
+        </span>
         @endif
       </div>
     </div>
@@ -95,17 +97,15 @@
             </select>
           </div>
           <div class="selected_engineer">
-            @can('admin')
             <label class="content">選択科目</label>
-            <div class="subject-margin">
-            <span class="math">国語</span><input type="checkbox" name="subject" value="1" form="userSearchRequest">
-            <span class="math">数学</span><input type="checkbox" name="subject" value="2" form="userSearchRequest">
-            <span class="math">英語</span><input type="checkbox" name="subject" value="3" form="userSearchRequest">
-            </div>
-            @endcan
+              @foreach($subjects as $subject)
+                <div class="japanese">
+                  <label>{{ $subject->subject }}</label>
+                  <input type="checkbox" class="check" name="subject[]" value="{{ $subject->id }}" form="userSearchRequest">
+                </div>
+              @endforeach
           </div>
         </div>
-      </div>
       <div>
       </div>
       <div>

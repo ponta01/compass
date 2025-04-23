@@ -13,8 +13,8 @@
           <div id="deleteModal" class="custom-modal">
             <div class="modal-content">
               <div class="modal-body">
-                <p>予約日 :</p>
-                <p>時間 :</p>
+                <p>予約日 :{{ $day->setting_reserve }}</p>
+                <p>時間 :{{ $part->setting_part }}</p>
                 <p>上記の予約をキャンセルしてもよろしいですか？</p>
               </div>
               <div class="modal-footer">
