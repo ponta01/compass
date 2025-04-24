@@ -811,6 +811,8 @@ label, select{
   height: 3%;
   width: 15%;
   margin: 0 40% 0 0;
+  position: relative;
+  right: 66%;
 }
 
 .btn-btn{

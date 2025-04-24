@@ -36,4 +36,9 @@ class CalendarController extends Controller
         }
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
+
+    public function delete(){
+        ReserveSetting::where('id', $id)->delete();
+        return redirect('/calender')->with('success', '投稿を削除しました！');
+    }
 }
