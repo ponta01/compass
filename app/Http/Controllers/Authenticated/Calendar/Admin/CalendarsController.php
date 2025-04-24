@@ -23,7 +23,8 @@ class CalendarsController extends Controller
     public function reserveDetail($date, $part){
         $reservePersons = ReserveSettings::with('users')
         ->where('setting_reserve', $date)
-        ->where('setting_part', $part)->get();
+        ->where('setting_part', $part)
+        ->get();
 
         $isPastDate = Carbon::parse($date)->lt(Carbon::today());
 

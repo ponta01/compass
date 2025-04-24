@@ -9,21 +9,22 @@
         <a href="javascript:void(0);">{!! $calendar->render() !!}</a>
 
         <!-- モーダル構造 -->
-        @if(Auth::user()->reserveSettings()->exists())
           <div id="deleteModal" class="custom-modal">
             <div class="modal-content">
               <div class="modal-body">
-                <p>予約日 :</p>
-                <p>時間 :</p>
+                <dt>予約日：</dt>
+                  <dd class="reserve_date"></dd>
+                <dt>時間：</dt>
+                  <dd class="reserve_part"></dd>
+                <input type="hidden" class="reserve_part" name="reservePart">
                 <p>上記の予約をキャンセルしてもよろしいですか？</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn-btn cancel-modal">閉じる</button>
-                <a href="{{ route('deleteParts') }}" method="POST" class="btn btn-danger">キャンセル</a>
+                <form action="{{ route('deleteParts') }}" class="btn btn-danger">キャンセル</form>
               </div>
             </div>
           </div>
-        @endif
       </div>
 
     </div>

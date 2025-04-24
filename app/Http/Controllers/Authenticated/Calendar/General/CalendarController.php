@@ -39,6 +39,18 @@ class CalendarController extends Controller
 
     public function delete(){
         ReserveSetting::where('id', $id)->delete();
-        return redirect('/calender')->with('success', '投稿を削除しました！');
+
+        DB::beginTransaction();
+        try{
+            $reservePart = $request->reservePart;
+            $reserve_date = $request->reserve_date;
+            $reserve_settings = ReserveSettings::where('setting_reserve', $reserve_date)->where('setting_part', $reservePart)->first();// 予約リミット数を増やす
+            $reserve_settings->increment('limit_users');// 削除
+
+             DB::commit();
+        }catch(\Exception $e){
+            DB::rollback();
+        }
+        return redirect('/calender.general.show', ['user_id' => Auth::id()]);
     }
 }

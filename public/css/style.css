@@ -823,3 +823,25 @@ label, select{
 .day_part{
   display: block;
 }
+
+.text-center{
+
+}
+
+.detail-width{
+  width: 33%;
+}
+
+.text-table{
+  background-color: #EEE;
+}
+
+.h-75{
+  min-height: 75% !important;
+  background-color: white;
+}
+
+.detail-group{
+  background-color: #03AAD2 !important;
+  color: #EEE !important;
+}
