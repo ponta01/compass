@@ -45,17 +45,18 @@ class PostsController extends Controller
         $categories = MainCategory::with('subCategories')->get();
         $like = new Like;
         $post_comment = new Post;
-        if(!empty($request->keyword)){
-            $posts = Post::with('user', 'postComments', 'subCategories')
-            ->where('post_title', 'like', '%'.$request->keyword.'%')
-            ->orWhere('post', 'like', '%'.$request->keyword.'%')->get();
-        }else if($request->sub_category){
-            $subcategory = $request->input('sub_category');
-            $posts = Post::with('user', 'postComments', 'subCategories')->whereHas('subCategories', function ($q) use ($subcategory) {
-            $q->where('sub_categories.sub_category', '=', $subcategory); //Filter by subcategory ID
-        })
-        ->with('user', 'subCategories', 'postComments') // Load related data
-        ->get();
+        if (!empty($request->keyword)) {
+    $posts = Post::with('user', 'postComments', 'subCategories')
+        ->where('post_title', 'like', '%' . $request->keyword . '%')
+        ->orWhere('post', 'like', '%' . $request->keyword . '%')
+        ->orWhereHas('subCategories', function ($query) use ($request) {
+            $query->where('sub_category', '=', $request->keyword);
+        })->get();
+        }else if ($request->sub_category) {
+            // サブカテゴリで絞り込む処理
+            $posts = Post::whereHas('subCategories', function ($query) use ($request) {
+                $query->where('sub_category', $request->sub_category);
+            })->get();
         }else if($request->like_posts){
             $likes = Auth::user()->likePostId()->get('like_post_id');
             $posts = Post::with('user', 'postComments')
@@ -180,37 +181,45 @@ class PostsController extends Controller
          return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
      }
 
-     public function postLike(Request $request){
-         $user_id = Auth::id();
-         $post_id = $request->post_id;
+     public function postLike(Request $request)
+    {
+        $user_id = Auth::id();
+        $post_id = $request->post_id;
 
-         $like = new Like;
-         $like->like_user_id = $user_id;
-         $like->like_post_id = $post_id;
-         $like->save();
 
-         $likeCounts = Like::where('like_post_id', $post_id)->count();
+        // $like = new Like;
+        // すでにいいねが存在するか確認
+        $existingLike = Like::where('like_user_id', $user_id)
+            ->where('like_post_id', $post_id)
+            ->first();
 
-         return response()->json(['like_counts' => $likeCounts,
-        ]);
-     }
+        if (!$existingLike) {
+            // まだいいねしていない場合、新しいいいねを作成
+            $like = new Like;
+            $like->like_user_id = $user_id;
+            $like->like_post_id = $post_id;
+            $like->save();
+        } else {
+            // すでにいいねしている場合、いいねを取り消す
+            $existingLike->delete();
+        }
 
-     public function postUnLike(Request $request){
-         $user_id = Auth::id();
-         $post_id = $request->post_id;
+        return response()->json();
+    }
 
-         $like = new Like;
+     public function postUnLike(Request $request)
+    {
+        $user_id = Auth::id();
+        $post_id = $request->post_id;
 
-         $like->where('like_user_id', $user_id)
-              ->where('like_post_id', $post_id)
-              ->delete();
+        $like = new Like;
 
-        $likeCounts = Like::where('like_post_id', $post_id)->count();
+        $like->where('like_user_id', $user_id)
+            ->where('like_post_id', $post_id)
+            ->delete();
 
-         return response()->json([
-        'like_counts' => $likeCounts,
-    ]);
-}
+        return response()->json();
+    }
 
     public function store(Request $request)
 {

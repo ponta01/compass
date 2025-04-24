@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // モーダルを開く
   openModalButton.addEventListener('click', function () {
-    modal.style.display = 'flex'; // モーダルを表示（CSSのflexを適用）
+    modal.style.display = 'flex';
+    console.log(this);// モーダルを表示（CSSのflexを適用）
   });
 
   // モーダルを閉じる

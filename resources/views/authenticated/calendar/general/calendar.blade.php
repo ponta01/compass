@@ -6,7 +6,7 @@
       <p class="text-center">{{ $calendar->getTitle() }}</p>
       <div class="">
 
-        <a href="javascript:void(0);" class="open-modal">{!! $calendar->render() !!}</a>
+        <a href="javascript:void(0);">{!! $calendar->render() !!}</a>
 
         <!-- モーダル構造 -->
         @if(Auth::user()->reserveSettings()->exists())
