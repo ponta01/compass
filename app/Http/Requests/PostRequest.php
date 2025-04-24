@@ -58,8 +58,6 @@ class PostRequest extends FormRequest
 }
 
 
-    public function postValidates(PostRequest $request) {
-        return view('auth.register.register',['msg'=>'OK']);
-}
+
 
 }
