@@ -845,3 +845,11 @@ label, select{
   background-color: #03AAD2 !important;
   color: #EEE !important;
 }
+
+.ml-30{
+  margin-left: 30px;
+}
+
+.passed-day{
+  background-color: #eeeeee;
+}

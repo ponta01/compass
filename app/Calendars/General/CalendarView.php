@@ -3,6 +3,7 @@ namespace App\Calendars\General;
 
 use Carbon\Carbon;
 use Auth;
+use App\Models\Calendars\ReserveSettings;
 
 class CalendarView{
 
@@ -41,7 +42,8 @@ class CalendarView{
         $toDay = $this->carbon->copy()->format("Y-m-d");
 
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-          $html[] = '<td class="calendar-td">';
+          // passed-dayを追加し過去の日付をグレーに
+          $html[] = '<td class="calendar-td passed-day">';
         }else{
           $html[] = '<td class="calendar-td '.$day->getClassName().'">';
         }
@@ -50,24 +52,33 @@ class CalendarView{
         if(in_array($day->everyDay(), $day->authReserveDay())){
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
           if($reservePart == 1){
-            $reservePart = "リモ1部";
+            $reservePart = "リモ1部"; $reservePartPast = "1部参加";
           }else if($reservePart == 2){
-            $reservePart = "リモ2部";
+            $reservePart = "リモ2部"; $reservePartPast = "2部参加";
           }else if($reservePart == 3){
-            $reservePart = "リモ3部";
-          }
+            $reservePart = "リモ3部"; $reservePartPast = "3部参加";
+          }// ここから過去
           if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
-            $html[] = '<input type="text" name="getPart[]" value="受付終了" form="reserveParts">';
-          }else{
-            $html[] = '<button type="submit" class="btn btn-danger open-modal p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
+            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">'.$reservePartPast.'</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
-          }
-        }else{
+          }else{// ここから未来
+            $reserve_settings = ReserveSettings::get();
+            $reserve_settings_id = $day->authReserveDate($day->everyDay())->first()->id;
+            $id = $reserve_settings->first()->users
+            ->where('reserve_setting_id', $reserve_settings_id)
+            ->first();
+            $html[] = '<button type="submit" class="btn btn-danger open-modal p-0 w-75"  cancel-modal-open name="delete_date" id = "'.$id.'" reserve_part = "'.$reservePart.'" reserve_date ="'.$day->authReserveDate($day->everyDay())->first()->setting_reserve.'"  style="font-size:12px"  reservePart="'. $day->authReserveDate($day->everyDay())->first()->setting_part .'">'. $reservePart .'</button>';
+            $html[] = '<input type="hidden" name="getId[]" value="" form="deleteParts">';	$html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+          }// 予約してない過去日の場合
+          } else if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
+          $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
+          $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+          }else{
           $html[] = $day->selectPart($day->everyDay());
-        }
-        $html[] = $day->getDate();
-        $html[] = '</td>';
+          }
+          $html[] = $day->getDate();
+          $html[] = '</td>';
       }
       $html[] = '</tr>';
     }

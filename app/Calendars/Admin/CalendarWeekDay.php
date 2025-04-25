@@ -31,13 +31,16 @@ class CalendarWeekDay{
 
     $html[] = '<div class="text-left">';
     if($one_part){
-      $html[] = '<a href="/calendar/' . $ymd . '/1" class="day_part m-0 pt-1">1部</a>';
+      $html[] = '<div class="d-flex align-items-center">
+              <a href="'. route('calendar.admin.detail', ['date' => $ymd, 'part' => '1']) . '" class="day_part m-0 pt-1">1部</a>
+              <span class="ml-30">'.count($one_part->users).'</span>
+          </div>';
     }
     if($two_part){
-      $html[] = '<a href="/calendar/' . $ymd . '/2" class="day_part m-0 pt-1">2部</a>';
+      $html[] = '<div class="d-flex align-items-center"><a href="'. route('calendar.admin.detail', ['date' => $ymd, 'part' => '2']) . '" class="day_part m-0 pt-1">2部</a><span class="ml-30">'.count($two_part->users).'</span></div>';
     }
     if($three_part){
-      $html[] = '<a href="/calendar/' . $ymd . '/3" class="day_part m-0 pt-1">3部</a>';
+      $html[] = '<div class="d-flex align-items-center"><a href="'. route('calendar.admin.detail', ['date' => $ymd, 'part' => '3']) . '" class="day_part m-0 pt-1">3部</a><span class="ml-30">'.count($three_part->users).'</span></div>';
     }
     $html[] = '</div>';
 

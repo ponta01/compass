@@ -12,9 +12,9 @@
           <div id="deleteModal" class="custom-modal">
             <div class="modal-content">
               <div class="modal-body">
-                <dt>予約日：</dt>
+                <dt>予約日：{{ $reserve_date }}</dt>
                   <dd class="reserve_date"></dd>
-                <dt>時間：</dt>
+                <dt>時間：{{ $reservePart }}</dt>
                   <dd class="reserve_part"></dd>
                 <input type="hidden" class="reserve_part" name="reservePart">
                 <p>上記の予約をキャンセルしてもよろしいですか？</p>

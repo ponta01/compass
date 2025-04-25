@@ -37,7 +37,7 @@ class CalendarController extends Controller
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
 
-    public function delete(){
+    public function delete(Request $request, $id){
         ReserveSetting::where('id', $id)->delete();
 
         DB::beginTransaction();
@@ -51,6 +51,6 @@ class CalendarController extends Controller
         }catch(\Exception $e){
             DB::rollback();
         }
-        return redirect('/calender.general.show', ['user_id' => Auth::id()]);
+        return view('deleteParts', compact('reservePart', 'reserve_date'));
     }
 }

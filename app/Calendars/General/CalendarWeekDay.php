@@ -2,6 +2,7 @@
 namespace App\Calendars\General;
 
 use App\Models\Calendars\ReserveSettings;
+use App\Calendars\General\CalendarView;
 use Carbon\Carbon;
 use Auth;
 
