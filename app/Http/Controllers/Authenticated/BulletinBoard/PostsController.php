@@ -168,11 +168,11 @@ class PostsController extends Controller
          return redirect()->route('post.detail', ['id' => $request->post_id]);
      }
 
-    public function myBulletinBoard(){
-         $posts = Auth::user()->posts()->get();
-         $like = new Like;
-         return view('authenticated.bulletinboard.post_myself', compact('posts', 'like'));
-     }
+     public function myBulletinBoard(){
+        $posts = Auth::user()->posts()->get();
+        $likes = Like::all(); // すべての「いいね」を取得
+        return view('authenticated.bulletinboard.post_myself', compact('posts', 'likes'));
+}
 
      public function likeBulletinBoard(){
          $like_post_id = Like::with('users')->where('like_user_id', Auth::id())->get('like_post_id')->toArray();
