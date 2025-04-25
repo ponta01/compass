@@ -8,7 +8,7 @@ use App\Calendars\Admin\CalendarView;
 use App\Calendars\Admin\CalendarSettingView;
 use App\Models\Calendars\ReserveSettings;
 use App\Models\Calendars\Calendar;
-use App\Models\USers\User;
+use App\Models\Users\User;
 use Auth;
 use DB;
 use Carbon\Carbon;
@@ -26,9 +26,7 @@ class CalendarsController extends Controller
         ->where('setting_part', $part)
         ->get();
 
-        $isPastDate = Carbon::parse($date)->lt(Carbon::today());
-
-        return view('authenticated.calendar.admin.reserve_detail', compact('reservePersons', 'date', 'part', 'isPastDate'));
+        return view('authenticated.calendar.admin.reserve_detail', compact('reservePersons', 'date', 'part'));
     }
 
     public function reserveSettings(){

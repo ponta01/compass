@@ -64,7 +64,7 @@ class User extends Authenticatable
     }
 
     public function reserveSettings(){
-        return $this->belongsToMany('App\Models\Calendars\ReserveSettings', 'reserve_setting_users', 'user_id', 'reserve_setting_id')->withPivot('id');
+        return $this->belongsToMany('App\Models\Calendars\ReserveSettings', 'reserve_setting_users', 'user_id', 'reserve_setting_id')->withPivot('id', 'reserve_setting_id');
     }
 
     // ユーザーと科目の多対多リレーション
