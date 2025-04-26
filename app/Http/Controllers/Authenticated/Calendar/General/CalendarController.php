@@ -37,8 +37,8 @@ class CalendarController extends Controller
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
 
-    public function delete(Request $request, $id){
-        ReserveSetting::where('id', $id)->delete();
+    public function delete(Request $request){
+
 
         DB::beginTransaction();
         try{
@@ -46,11 +46,12 @@ class CalendarController extends Controller
             $reserve_date = $request->reserve_date;
             $reserve_settings = ReserveSettings::where('setting_reserve', $reserve_date)->where('setting_part', $reservePart)->first();// 予約リミット数を増やす
             $reserve_settings->increment('limit_users');// 削除
+            $reserve_settings->users()->detach(Auth::id());
 
              DB::commit();
         }catch(\Exception $e){
             DB::rollback();
         }
-        return view('deleteParts', compact('reservePart', 'reserve_date'));
+         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
 }

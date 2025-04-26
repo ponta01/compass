@@ -52,7 +52,7 @@ class CalendarView{
     }
     $html[] = '</tbody>';
     $html[] = '</table>';
-    $html[] = '</div>';
+    $html[] = '</div class="calendar-body">';
 
     return implode("", $html);
   }

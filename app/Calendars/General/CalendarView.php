@@ -19,16 +19,16 @@ class CalendarView{
   function render(){
     $html = [];
     $html[] = '<div class="calendar text-center">';
-    $html[] = '<table class="table">';
+    $html[] = '<table class="table border">';
     $html[] = '<thead>';
     $html[] = '<tr>';
-    $html[] = '<th>月</th>';
-    $html[] = '<th>火</th>';
-    $html[] = '<th>水</th>';
-    $html[] = '<th>木</th>';
-    $html[] = '<th>金</th>';
-    $html[] = '<th>土</th>';
-    $html[] = '<th>日</th>';
+    $html[] = '<th class="weekDay border">月</th>';
+    $html[] = '<th class="weekDay border">火</th>';
+    $html[] = '<th class="weekDay border">水</th>';
+    $html[] = '<th class="weekDay border">木</th>';
+    $html[] = '<th class="weekDay border">金</th>';
+    $html[] = '<th class="weekEnd border">土</th>';
+    $html[] = '<th class="week-end border">日</th>';
     $html[] = '</tr>';
     $html[] = '</thead>';
     $html[] = '<tbody>';
@@ -43,14 +43,17 @@ class CalendarView{
 
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
           // passed-dayを追加し過去の日付をグレーに
-          $html[] = '<td class="calendar-td passed-day">';
+          $html[] = '<td class="border blackDay calendar-td passed-day">';
         }else{
-          $html[] = '<td class="calendar-td '.$day->getClassName().'">';
+          $html[] = '<td class="border blackDay calendar-td '.$day->getClassName().'">';
         }
         $html[] = $day->render();
 
-        if(in_array($day->everyDay(), $day->authReserveDay())){
+        // 今日以降で予約している日に予約部を表示する（はじめから記述されていた(頭にelse追加した)）	if(in_array($day->everyDay(), $day->authReserveDay())){
+        // else if (in_array($day->everyDay(), $day->authReserveDay())) {
+          if (in_array($day->everyDay(), $day->authReserveDay())) {
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
+
           if($reservePart == 1){
             $reservePart = "リモ1部"; $reservePartPast = "1部参加";
           }else if($reservePart == 2){
@@ -59,7 +62,7 @@ class CalendarView{
             $reservePart = "リモ3部"; $reservePartPast = "3部参加";
           }// ここから過去
           if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">'.$reservePartPast.'</p>';
+            $html[] = '<p class="everyPart m-auto p-0 w-75" style="font-size:12px">'.$reservePartPast.'</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }else{// ここから未来
             $reserve_settings = ReserveSettings::get();
@@ -72,7 +75,7 @@ class CalendarView{
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }// 予約してない過去日の場合
           } else if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
-          $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
+          $html[] = '<p class="reception m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
           $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }else{
           $html[] = $day->selectPart($day->everyDay());
@@ -105,4 +108,5 @@ class CalendarView{
     }
     return $weeks;
   }
+
 }

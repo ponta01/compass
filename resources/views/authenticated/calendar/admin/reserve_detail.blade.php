@@ -1,23 +1,19 @@
 <x-sidebar>
 <div class="vh-100 d-flex" style="align-items:center; justify-content:center;">
   <div class="w-50 m-auto h-75">
-    @foreach($reservePersons as $person)
-    <p><span>{{ $person->setting_reserve }}日</span>
-    <span class="ml-3">{{ $person->setting_part }}部</span></p>
-    @endforeach
-    <div class="h-75 border">
-      <table class="">
-        <tr class="text-center">
-          <span class="detail-group">
+    <p><span>{{$date}}日</span><span class="ml-3">{{$part}}部</span></p>
+    <div class="border reserve-table">
+      <table class="w-100">
+        <tr class="text-center reserve-table-header">
           <th class="w-25">ID</th>
           <th class="w-25">名前</th>
-          <th class="w-25">場所</th></span>
+          <th class="w-25">場所</th>
         </tr>
-        @foreach($reservePersons as $person)
-        @foreach($reservePersons->users as $user)
-        <tr class="text-line">
-          <td class="w-25">{{ $person->id }}</td>
-          <td class="w-25">{{ $user->over_name.$user->under_name }}</td>
+        @foreach($reservePersons as $reservePerson)
+        @foreach($reservePerson->users as $user)
+        <tr class="text-center reserve-table-record">
+          <td class="w-25">{{$user->id}}</td>
+          <td class="w-25">{{$user->over_name.$user->under_name}}</td>
           <td class="w-25">リモート</td>
         </tr>
         @endforeach

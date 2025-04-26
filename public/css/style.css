@@ -73,7 +73,7 @@ li {
 
 .sidebar {
   width: 250px;
-  min-height: 105vh;
+  min-height: 100vh;
   background-color: #03AAD2;
   font-weight: bold;
 }
@@ -825,7 +825,11 @@ label, select{
 }
 
 .text-center{
-
+    all: unset;
+    margin-left: 45%;
+    justify-content: center;
+    line-height: 1.5;    /* 行間を調整（必要に応じて） */
+    font-size: 20px;     /* フォントサイズを調整（適宜変更） */
 }
 
 .detail-width{
@@ -852,4 +856,80 @@ label, select{
 
 .passed-day{
   background-color: #eeeeee;
+}
+
+.adjust-area p {
+  justify-content: space-around;
+}
+
+
+.circle.custom-bg {
+  margin: 3% 10% 0% 10%;                /* 外側の余白を指定 */
+  background-color: #ffffff;  /* 背景色を白に設定 */
+  border: 2px solid #ccc;     /* 枠線を追加 */
+  padding: 20px;              /* 内側の余白を追加 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0); /* ボックスシャドウ */
+  border-radius: 10px;        /* 少し丸みを加える */
+  max-height: 90vh;           /* 最大高さをビューポートの高さに制限 */
+  max-width: 70vw;            /* 最大幅を画面幅の90%に制限 */
+  overflow: hidden;           /* 溢れたコンテンツを切り取る */
+  display: flex;              /* フレックスボックスを適用 */
+  flex-direction: column;     /* 上下方向の配置 */
+  justify-content: space-between; /* コンテンツを均等に配置 */
+  box-sizing: border-box;     /* パディングを含むサイズ調整 */
+  position: absolute;          /* 相対位置に基づいて固定 */
+  bottom: 0;                   /* 画面の下端に固定 */
+}
+
+
+.calendar {
+  transform: scale(0.88); /* 縮尺の設定（ここを調整） */
+  transform-origin: top left; /* 縮小の基準点 */
+  width: 150%;
+  height: 96%;
+}
+
+.reception{
+  color: #000;
+}
+
+.everyPart{
+  color: #000;
+}
+
+.blackDay{
+  color: #000;
+}
+
+.weekDay{
+  color: #000;
+}
+
+.weekEnd{
+  color: #0000FF;
+}
+
+.week-end{
+  color: #dc3545;
+}
+
+/* 予約詳細 */
+.reserve-table {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.reserve-table-header {
+  color: #fff;
+  background-color: #03aad2;
+}
+
+.reserve-table tr:nth-child(odd) td {
+  background-color: #e5f6fa;
+}
+
+.main-part {
+  color: #000;
+  background-color: gainsboro;
 }
