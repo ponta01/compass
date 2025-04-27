@@ -280,8 +280,5 @@ class PostsController extends Controller
     return redirect()->back()->with('success', 'サブカテゴリーが追加されました！');
 }
 
-   public function postValidates(PostRequest $request) {
-        return view('auth.register.register',['msg'=>'OK']);
-}
 
 }

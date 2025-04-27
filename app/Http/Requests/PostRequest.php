@@ -32,9 +32,9 @@ class PostRequest extends FormRequest
             'under_name_kana' => ['required', 'string', 'regex:/^[ァ-ヶー]+$/u', 'max:30'],
             'mail_address' => ['required', 'email', 'max:100', 'unique:users'],
             'sex' => ['required', 'integer', 'in:1,2,3'],
-            'birth_day' => ['required', 'date', 'after_or_equal:1900-01-01', Rule::beforeOrEqual(now()->toDateString())],
+            // 'birth_day' => ['required', 'date', 'after_or_equal:1900-01-01', Rule::beforeOrEqual(now()->toDateString())],
             'role' => ['required', 'integer', 'in:1,2,3,4'],
-            'password' => ['required','min:8', 'max:30', 'confirmed', Rules\Password::defaults()],
+            // 'password' => ['required','min:8', 'max:30', 'confirmed', Rules\Password::defaults()],
             'password_confirmation' => ['required','min:8', 'max:30','same:password'],
         ];
     }

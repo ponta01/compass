@@ -70,8 +70,8 @@ class CalendarView{
             $id = $reserve_settings->first()->users
             ->where('reserve_setting_id', $reserve_settings_id)
             ->first();
-            $html[] = '<button type="submit" class="btn btn-danger open-modal p-0 w-75"  cancel-modal-open name="delete_date" id = "'.$id.'" reserve_part = "'.$reservePart.'" reserve_date ="'.$day->authReserveDate($day->everyDay())->first()->setting_reserve.'"  style="font-size:12px"  reservePart="'. $day->authReserveDate($day->everyDay())->first()->setting_part .'">'. $reservePart .'</button>';
-            $html[] = '<input type="hidden" name="getId[]" value="" form="deleteParts">';	$html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+            $html[] = '<button type="submit" class="btn btn-danger open-modal p-0 w-75"  cancel-modal-open name="delete_date" reserve_part = "'.$reservePart.'" reserve_date ="'.$day->authReserveDate($day->everyDay())->first()->setting_reserve.'"  style="font-size:12px"  reservePart="'. $day->authReserveDate($day->everyDay())->first()->setting_part .'">'. $reservePart .'</button>';
+            // $html[] = '<input type="hidden" name="getId[]" value="" form="deleteParts">';	$html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }// 予約してない過去日の場合
           } else if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {

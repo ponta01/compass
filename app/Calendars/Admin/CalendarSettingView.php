@@ -16,8 +16,8 @@ class CalendarSettingView{
 
   public function render(){
     $html = [];
-    $html[] = '<div class="">';
-    $html[] = '<table class="table m-auto border adjust-table">';
+    $html[] = '<div class="h-100">';
+    $html[] = '<table class="w-100 table m-auto border adjust-table">';
     $html[] = '<thead>';
     $html[] = '<tr>';
     $html[] = '<th class="border">g月</th>';

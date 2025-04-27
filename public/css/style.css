@@ -25,6 +25,14 @@
   margin-left: 20px;
 }
 
+.old_day{
+  border: none;
+  border-bottom: 1px solid #0000FF;
+  width: 25%;
+  justify-content: center;
+  margin-left: 20px;
+}
+
 #atlas{
   margin: 10% 35% 5% 45%
 }
@@ -766,7 +774,7 @@ label, select{
   max-width: 50%;
   padding: 20px;
   position: relative;
-  font-size: large !important;
+  margin: 15% 30%;
 }
 
 /* ヘッダー部分 */
@@ -864,9 +872,8 @@ label, select{
 
 
 .circle.custom-bg {
-  margin: 3% 10% 0% 10%;                /* 外側の余白を指定 */
+  margin: 3% 7% 0% 7% !important;                /* 外側の余白を指定 */
   background-color: #ffffff;  /* 背景色を白に設定 */
-  border: 2px solid #ccc;     /* 枠線を追加 */
   padding: 20px;              /* 内側の余白を追加 */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0); /* ボックスシャドウ */
   border-radius: 10px;        /* 少し丸みを加える */

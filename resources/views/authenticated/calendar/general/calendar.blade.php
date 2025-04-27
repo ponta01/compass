@@ -7,22 +7,21 @@
 
         <!-- モーダル構造 -->
           <div id="deleteModal" class="custom-modal">
-            <div class="modal-content">
+            <div class="modal-content open-modal">
               <div class="modal-body">
-                <dt>予約日：</dt>
-                  <dd class="reserve_date"></dd>
-                  <input type="hidden" class="reserve_date" name="reserve_date">
-                <dt>時間：</dt>
-                  <dd class="reserve_part"></dd>
-                <input type="hidden" class="reserve_part" name="reservePart">
+                <div class="reserve_date">予約日：
+                  <p class="reserve_date"></p></div>
+                <div class="reservePart">時間：
+                  <p class="reservePart"></p></div>
+
                 <p>上記の予約をキャンセルしてもよろしいですか？</p>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn-btn cancel-modal">閉じる</button>
-                <form action="{{ route('deleteParts') }}" method="POST" class="d-inline">
+                <span class="btn-btn cancel-modal" reserve_date="" reservePart="">閉じる</span>
+                <a href="{{ route('deleteParts') }}" method="POST" class="d-inline">
                   @csrf <!-- CSRFトークンを追加 -->
-                  <button type="submit" class="btn btn-danger">キャンセル</button>
-                </form>
+                  <button type="submit" class="btn btn-danger id="reserveParts">キャンセル</button>
+                </a>
               </div>
             </div>
           </div>
