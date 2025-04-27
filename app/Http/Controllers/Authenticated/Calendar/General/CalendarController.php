@@ -48,8 +48,10 @@ class CalendarController extends Controller
         DB::beginTransaction();
         try{
             $reservePart = $request->reservePart;
+            dd($reservePart);
             $reserve_date = $request->reserve_date;
             $reserve_settings = ReserveSettings::where('setting_reserve', $reserve_date)->where('setting_part', $reservePart)->first();// 予約リミット数を増やす
+            dd($reserve_settings);
             $reserve_settings->increment('limit_users');// 削除
             $reserve_settings->users()->detach(Auth::id());
 
