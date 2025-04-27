@@ -60,8 +60,8 @@ class PostFormRequest extends FormRequest
 
             'over_name' => 'required|string|max:10',
             'under_name' => 'required|string|max:10',
-            'over_name_kana' => 'required|string|katakana|max:30',
-            'under_name_kana' => 'required|string|katakana|max:30',
+            'over_name_kana' => 'required|string|regex:/^[ァ-ヶー]+$/u|max:30',
+            'under_name_kana' => 'required|string|regex:/^[ァ-ヶー]+$/u|max:30',
             'mail_address' => 'required|email|unique:users|max:100',
             'sex' => 'required|regex:/^[1-3]$/',
             'old_year' => 'valid_date_range',

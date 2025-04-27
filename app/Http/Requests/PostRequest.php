@@ -28,7 +28,7 @@ class PostRequest extends FormRequest
         return [
             'over_name' => ['required', 'string', 'max:10'],
             'under_name' =>  ['required', 'string', 'max:10'],
-            'over_name_kana' => ['max:1', 'regex:/^[男|女]+$/u'],
+            'over_name_kana' => ['max:1', 'regex:/^[ァ-ヶー]+$/u'],
             'under_name_kana' => ['required', 'string', 'regex:/^[ァ-ヶー]+$/u', 'max:30'],
             'mail_address' => ['required', 'email', 'max:100', 'unique:users'],
             'sex' => ['required', 'integer', 'in:1,2,3'],

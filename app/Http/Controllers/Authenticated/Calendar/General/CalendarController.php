@@ -49,12 +49,11 @@ class CalendarController extends Controller
         try{
             $reservePart = $request->reservePart;
             $reserve_date = $request->reserve_date;
-            dd($reserve_date);
             $reserve_settings = ReserveSettings::where('setting_reserve', $reserve_date)->where('setting_part', $reservePart)->first();// 予約リミット数を増やす
             $reserve_settings->increment('limit_users');// 削除
             $reserve_settings->users()->detach(Auth::id());
 
-             DB::commit();
+            DB::commit();
         }catch(\Exception $e){
             DB::rollback();
         }
