@@ -20,8 +20,8 @@
                 <p>上記の予約をキャンセルしてもよろしいですか？</p>
               </div>
               <div class="modal-footer">
-                <span class="btn-btn cancel-modal" name="reserve_date">閉じる</span>
-                  <button type="submit" class="btn btn-danger">キャンセル</button>
+                <a href="" class="btn-btn cancel-modal">閉じる</a>
+                  <input type="submit" class="btn btn-danger" value="キャンセル">
               </div>
               </form>
             </div>

@@ -814,13 +814,14 @@ label, select{
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-  padding: 4px 4px 4px 4px;
+  padding: 7px 7px 7px 7px;
   border-radius: .25rem;
   height: 3%;
   width: 15%;
-  margin: 0 40% 0 0;
+  margin: 0 40% 0 60%;
   position: relative;
   right: 66%;
+  text-align: center;
 }
 
 .btn-btn{
@@ -939,4 +940,12 @@ label, select{
 .main-part {
   color: #000;
   background-color: gainsboro;
+}
+
+.reserve_date {
+  display: flex
+}
+
+.reservePart {
+  display: flex
 }
